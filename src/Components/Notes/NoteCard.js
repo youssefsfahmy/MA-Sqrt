@@ -11,6 +11,7 @@ import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import { AiOutlinePushpin,AiFillPushpin,AiFillDelete } from "react-icons/ai";
+import {RiAlarmFill} from "react-icons/ri"
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -97,12 +98,16 @@ export default function NoteCard() {
         <p className={classes.pp}>{value2}</p>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <IconButton aria-label="alarm">
+          <RiAlarmFill />
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
+        <IconButton aria-label="add to favorites">
+          <AiFillDelete />
+        </IconButton>
+
       </CardActions>
     </Card>
     <Dialog
