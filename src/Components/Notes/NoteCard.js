@@ -45,7 +45,18 @@ const useStyles = makeStyles((theme) => ({
   },
   dial: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    width: "30vw",
+    // height: "30vw",
+    justifyContent: "center",
+    // overflow: "hidden"
+  },
+  dial2: {
+    // display: "flex",
+    // flexDirection: "column",
+    // width: "40vw",
+    // justifyContent: "center",
+    // overflowX: "hidden"
   },
   noteContent:{
       // width: "12vfitw"
@@ -55,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function NoteCard() {
+export default function NoteCard(props) {
   const classes = useStyles();
 
   //////////// STATES /////////////////
@@ -67,6 +78,11 @@ export default function NoteCard() {
   ///////////////// callbacks//////////////
   const handleChange = (event) => {
     setValue(event.target.value);
+  };
+  const onDelete = (event) => {
+      console.log('xx')
+      const xx=props.arr.filter((elem)=>elem.id!==props.elem.id)
+      props.setArr([...xx]) 
   };
   const handleChange2 = (event) => {
     setValue2(event.target.value);
@@ -88,14 +104,14 @@ export default function NoteCard() {
             <AiOutlinePushpin />
           </IconButton>
         }
-        title={value}
+        title={props.elem.title}
         subheader="September 14, 2016"
       />
       <CardContent onClick={handleClickOpen} className={classes.noteContent}>
         {/* <Typography variant="body2" color="textSecondary" component="p" className={classes.noteContent}>
           {value2}
         </Typography> */}
-        <p className={classes.pp}>{value2}</p>
+        <p className={classes.pp}>{props.elem.content}</p>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="alarm">
@@ -104,13 +120,14 @@ export default function NoteCard() {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="delete" onClick={onDelete}>
           <AiFillDelete />
         </IconButton>
 
       </CardActions>
     </Card>
     <Dialog
+      //  className={classes.dial2}
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
@@ -125,6 +142,7 @@ export default function NoteCard() {
             defaultValue={""}
             onChange={handleChange}
             variant="outlined"
+            style={{overflow:'hidden'}}
           />
           <TextField
             id="outlined-multiline-static"
@@ -136,7 +154,10 @@ export default function NoteCard() {
             variant="outlined"
             onChange={handleChange2}
             className={classes.field}
+            style={{overflow:'hidden'}}
+
           />
+            
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
