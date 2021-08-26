@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function SignIn() {
+export default function SignUp2() {
   return (
     <div
       style={{
@@ -20,28 +20,8 @@ export default function SignIn() {
           fontWeight: "800",
         }}
       >
-        SIGN IN
+        SIGN UP
       </h1>
-      <div>
-        <label
-          style={{
-            fontWeight: "600",
-            fontFamily: "sans-serif",
-            paddingLeft: "5vw",
-          }}
-        >
-          Phone OR Email{" "}
-        </label>
-      </div>
-      <input
-        style={{
-          marginLeft: "5vw",
-          marginBottom: "2vw",
-          height: "2vw",
-          width: "20vw",
-        }}
-        type="text"
-      />
       <div>
         <label
           style={{
@@ -56,6 +36,72 @@ export default function SignIn() {
       <input
         style={{
           marginLeft: "5vw",
+          height: "2vw",
+          width: "20vw",
+        }}
+        type="text"
+      />
+      <div
+        style={{
+          display: "flex",
+          marginLeft: "3.5vw",
+        }}
+      >
+        <div>
+          <ul>
+            <li
+              style={{
+                color: "green",
+              }}
+            >
+              {" "}
+              Lower-case{" "}
+            </li>
+            <li
+              style={{
+                color: "green",
+              }}
+            >
+              {" "}
+              Upper-case{" "}
+            </li>
+          </ul>
+        </div>
+        <ul>
+          <li
+            style={{
+              color: "green",
+            }}
+          >
+            {" "}
+            8-Characters{" "}
+          </li>
+          <li
+            style={{
+              color: "green",
+            }}
+          >
+            {" "}
+            Numbers{" "}
+          </li>
+        </ul>
+        <div></div>
+      </div>
+
+      <div>
+        <label
+          style={{
+            fontWeight: "600",
+            fontFamily: "sans-serif",
+            paddingLeft: "5vw",
+          }}
+        >
+          Confirm Password{" "}
+        </label>
+      </div>
+      <input
+        style={{
+          marginLeft: "5vw",
           marginBottom: "2vw",
           height: "2vw",
           width: "20vw",
@@ -63,56 +109,24 @@ export default function SignIn() {
         type="text"
       />
       <div>
-        <button
-          style={{
-            backgroundColor: "white",
-            border: "none",
-            color: "#ED1C24",
-            fontWeight: "300",
-            fontSize: "1vw",
-            paddingLeft: "5vw",
-            marginBottom: "2.5vw",
-          }}
-        >
-          Forget Password?
-        </button>
-      </div>
-      <div>
-        <Link to="/Homepage">
+        <Link to="/login">
           <button
+            // onClick={() => {
+            //   props.setButton(1);
+            // }}
             style={{
               border: "none",
               marginLeft: "5vw",
               width: "20vw",
               height: "2vw",
-              backgroundColor: "#ED1C24",
+              backgroundColor: "#67E0FD",
               color: "white",
               fontWeight: "700",
               fontSize: "1vw",
               fontFamily: "sans-serif",
             }}
           >
-            LOG IN
-          </button>
-        </Link>
-      </div>
-      <div>
-        <Link to="/SignUp">
-          <button
-            style={{
-              border: "none",
-              marginLeft: "5vw",
-              marginTop: "1.5vw",
-              width: "20vw",
-              height: "2vw",
-              backgroundColor: "#ED1C24",
-              color: "white",
-              fontWeight: "700",
-              fontSize: "1vw",
-              fontFamily: "sans-serif",
-            }}
-          >
-            SIGN UP
+            SUBMIT
           </button>
         </Link>
       </div>

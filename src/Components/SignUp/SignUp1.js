@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-export default function SignIn() {
+export default function SignUp1(props) {
   return (
     <div
       style={{
@@ -20,7 +19,7 @@ export default function SignIn() {
           fontWeight: "800",
         }}
       >
-        SIGN IN
+        SIGN UP
       </h1>
       <div>
         <label
@@ -30,7 +29,7 @@ export default function SignIn() {
             paddingLeft: "5vw",
           }}
         >
-          Phone OR Email{" "}
+          E-mail{" "}
         </label>
       </div>
       <input
@@ -50,7 +49,7 @@ export default function SignIn() {
             paddingLeft: "5vw",
           }}
         >
-          Password{" "}
+          Full Name{" "}
         </label>
       </div>
       <input
@@ -64,57 +63,23 @@ export default function SignIn() {
       />
       <div>
         <button
+          onClick={() => {
+            props.setButton(1);
+          }}
           style={{
-            backgroundColor: "white",
             border: "none",
-            color: "#ED1C24",
-            fontWeight: "300",
+            marginLeft: "5vw",
+            width: "20vw",
+            height: "2vw",
+            backgroundColor: "#67E0FD",
+            color: "white",
+            fontWeight: "700",
             fontSize: "1vw",
-            paddingLeft: "5vw",
-            marginBottom: "2.5vw",
+            fontFamily: "sans-serif",
           }}
         >
-          Forget Password?
+          NEXT
         </button>
-      </div>
-      <div>
-        <Link to="/Homepage">
-          <button
-            style={{
-              border: "none",
-              marginLeft: "5vw",
-              width: "20vw",
-              height: "2vw",
-              backgroundColor: "#ED1C24",
-              color: "white",
-              fontWeight: "700",
-              fontSize: "1vw",
-              fontFamily: "sans-serif",
-            }}
-          >
-            LOG IN
-          </button>
-        </Link>
-      </div>
-      <div>
-        <Link to="/SignUp">
-          <button
-            style={{
-              border: "none",
-              marginLeft: "5vw",
-              marginTop: "1.5vw",
-              width: "20vw",
-              height: "2vw",
-              backgroundColor: "#ED1C24",
-              color: "white",
-              fontWeight: "700",
-              fontSize: "1vw",
-              fontFamily: "sans-serif",
-            }}
-          >
-            SIGN UP
-          </button>
-        </Link>
       </div>
     </div>
   );
