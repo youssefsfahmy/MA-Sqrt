@@ -1,7 +1,7 @@
-import { height } from "@material-ui/system";
 import React from "react";
 import NavBar from "../Components/HomePage/NavBar";
 import homebgd from "../Homepagebgd.png";
+import { height } from "@material-ui/system";
 
 export default function Homepage() {
   return (
@@ -16,8 +16,18 @@ export default function Homepage() {
           height: "20vw",
         }}
       >
-        <img src={homebgd} style={{ width: "100%" }} />
-        <h1 style={{ zIndex: 2 }}>Welcome Back,Maya</h1>
+        <img src={homebgd} style={{ width: "100%", height: "40vw" }} />
+        <h1
+          style={{
+            position: "absolute",
+            bottom: "230px",
+            left: "75px",
+            fontSize: "5vw",
+            color: "white",
+          }}
+        >
+          Welcome Back,Maya
+        </h1>
       </div>
     </div>
   );

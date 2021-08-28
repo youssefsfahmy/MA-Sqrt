@@ -9,6 +9,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import MA2 from "../../MA2logo.png";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,17 +61,19 @@ export default function NavBar() {
             backgroundColor: "#CC4D4D",
           }}
         >
-          <img
-            src={MA2}
-            alt={"LOGO"}
-            style={{
-              width: "10vw",
-              height: "3.5vw",
-              position: "relative",
-              left: "2vw",
-              top: "2vw",
-            }}
-          />
+          <Link to="/">
+            <img
+              src={MA2}
+              alt={"LOGO"}
+              style={{
+                width: "10vw",
+                height: "3.5vw",
+                position: "relative",
+                left: "2vw",
+                top: "2vw",
+              }}
+            />
+          </Link>
           <div
             className={classes.toolbar}
             style={{
@@ -80,15 +83,16 @@ export default function NavBar() {
               display: "flex",
             }}
           >
-            <button id="home" className={classes.home}>
-              Home
-            </button>
-            <button id="notes" className={classes.notes}>
-              Notes
-            </button>
-            <button id="todo" className={classes.todo}>
-              To-Do List
-            </button>
+            <Link to="/Notes">
+              <button id="notes" className={classes.notes}>
+                Notes
+              </button>
+            </Link>
+            <Link to="/Todo">
+              <button id="todo" className={classes.todo}>
+                To-Do List
+              </button>
+            </Link>
           </div>
           <div
             style={{
