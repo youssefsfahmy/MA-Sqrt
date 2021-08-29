@@ -1,9 +1,11 @@
-import React from 'react'
-import NoteSection from '../Components/Notes/Notes'
+import React from "react";
+import NavBar from "../Components/HomePage/NavBar";
+import NoteSection from "../Components/Notes/Notes";
 export default function Notes() {
-    return (
-        <div>
-            <NoteSection/>
-        </div>
-    )
+  return (
+    <div>
+      <NavBar />
+      <NoteSection />
+    </div>
+  );
 }
