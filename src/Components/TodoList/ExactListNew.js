@@ -8,6 +8,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import CommentIcon from '@material-ui/icons/Comment';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { Filter } from '@material-ui/icons';
+import reactDom from 'react-dom';
+import DoneIcon from '@material-ui/icons/Done';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,12 +22,27 @@ const useStyles = makeStyles(theme => ({
 
 function CheckboxList(props) {
   const classes = useStyles();
-  const [checked, setChecked] = React.useState([0]);
+  const [checked, setChecked] = React.useState([]);
+
 
 
   const handleDelete=(id) => {
-    
-    console.log('ayhaga')
+    console.log(id);
+    props.setArrayy(props.arrayy.filter(elem => elem.key !== id ))
+      console.log('ay haga')
+      console.log(id)
+    }
+  
+  
+
+  const handleCheck = (id) =>{
+    const myElement=props.arrayy[id]
+    props.setArrayy([...props.arrayy.slice(0,id),{...myElement,isComplete:!myElement.isComplete},...props.arrayy.slice(id+1)])
+  }
+
+  const handleEdit=(id) =>{
+    const elem = props.arrayy[id]
+    props.setArrayy([...props.arrayy.slice(0,id),{...elem,editMode:true},...props.arrayy.slice(id+1)])
   }
   
 
@@ -44,12 +62,15 @@ function CheckboxList(props) {
 
   return (
     <List className={classes.root}>
-      {props.arrayy.map(value => (
-        <ListItem key={value} role={undefined} dense button onClick={()=>handleToggle(value)}>
-          <Checkbox checked={ checked.indexOf(value) !== -1} tabIndex={-1} disableRipple />
-          <ListItemText primary={`Lss ${value + 1}`} />
+      {props.arrayy.map((elem,index) => (
+        <ListItem key={elem} role={undefined} dense button onClick={()=>handleToggle(elem)}>
+          {/* <Checkbox checked={ checked.indexOf(elem.isComplete) !== -1} tabIndex={-1} disableRipple  onClick={() => handleCheck(elem.key)}   id={elem.key}/> */}
+          <Checkbox checked={elem.isComplete} tabIndex={-1} disableRipple  onClick={() => handleCheck(index)}   id={elem.key}/>
+
+          <ListItemText className="listText"  primary={elem.text} onClick={() => handleEdit(index)} id={elem.key} />
           <ListItemSecondaryAction>
-            <IconButton aria-label="Comments" onClick={() => handleDelete(value.key)} id={value.key}>
+            <IconButton aria-label="Comments" onClick={() => handleDelete(elem.key)} id={elem.key}>
+              
               <DeleteIcon/>
             </IconButton>
           </ListItemSecondaryAction>
