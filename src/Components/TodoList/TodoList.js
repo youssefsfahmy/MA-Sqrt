@@ -4,34 +4,22 @@ import ExactlistNew from "./ExactListNew";
 
 export default function TodoList() {
   const [add, setAdd] = React.useState(false);
-  const [array, setArray] = React.useState([
-    {
-      isComplete: false,
-      text: "Todo 1",
-      key: 0,
-      editMode:false,
-    },
-    {
-      isComplete: true,
-      text: "Todo 2",
-      key: 1,
-      editMode:false,
-
-    },
-  ]);
-
+  const [title, setTitle] = React.useState("Untitled");
+  const [array, setArray] = React.useState([]);
 
   return (
-    <>
-      <h1>My Tasks</h1>
+    <div>
+      <div>
+        <h1>{title}</h1>
+      </div>
       <div className="capitalDiv">
         <div className="divMain">
-          <Textbox1 setaddd={setAdd} setArrayy={setArray} arrayy={array}  />
+          <Textbox1 setaddd={setAdd} setArrayy={setArray} arrayy={array} />
         </div>
         <div>
           <ExactlistNew arrayy={array} setArrayy={setArray} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
