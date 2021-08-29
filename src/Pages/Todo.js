@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import Sidebar from "../Components/TodoList/Sidebar";
 import TodoList from "../Components/TodoList/TodoList";
 
 export default function Todo() {
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+      }}
+    >
+      <Sidebar />
       <TodoList />
     </div>
   );

@@ -2,8 +2,12 @@ import React from "react";
 import NavBar from "../Components/HomePage/NavBar";
 import homebgd from "../Homepagebgd.png";
 import { height } from "@material-ui/system";
+import { useContext } from "react";
+import UserNamecontext from "../Components/UserNamecontext";
 
 export default function Homepage() {
+  const [user, setUser] = useContext(UserNamecontext);
+  console.log("User", user);
   return (
     <div>
       <NavBar />
@@ -26,7 +30,7 @@ export default function Homepage() {
             color: "white",
           }}
         >
-          Welcome Back,Maya
+          Welcome Back,{user}
         </h1>
       </div>
     </div>
