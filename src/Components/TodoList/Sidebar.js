@@ -25,10 +25,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Sidebar() {
+export default function Sidebar(props) {
   const classes = useStyles();
   const [key, setKey] = React.useState(0);
-  const [curr, setCurr] = React.useState(0);
+  //   const [curr, setCurr] = React.useState(0);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -38,11 +38,15 @@ export default function Sidebar() {
   const [lists, setLists] = React.useState([]);
   const onClick = () => {
     setLists([...lists, { title: "Untitled_" + key, key }]);
+    props.setAll([
+      ...props.all,
+      { title: "Untitled_" + key, key, arrTodos: [] },
+    ]);
     setKey(key + 1);
   };
 
   const onClick2 = (e, id) => {
-    setCurr(id);
+    props.setCur(id);
   };
   const toggleDrawer = (anchor, open) => (event) => {
     if (

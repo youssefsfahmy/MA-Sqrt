@@ -2,11 +2,25 @@ import React from "react";
 import Textbox1 from "./Textbox1";
 import ExactlistNew from "./ExactListNew";
 
-export default function TodoList() {
+export default function TodoList(props) {
+  console.log(props.cur);
   const [add, setAdd] = React.useState(false);
   const [title, setTitle] = React.useState("Untitled");
-  const [array, setArray] = React.useState([]);
-
+  const [array, setArray] = React.useState(
+    props.cur === -1 ? [] : props.all[props.cur]
+  );
+  console.log("AAAAA", array);
+  React.useEffect(() => {
+    console.log(array);
+    const arrTodos = props.cur === -1 ? [] : props.all[props.cur];
+    console.log(props.cur + " " + arrTodos);
+    // setArray(arrTodos);
+    props.setAll([
+      ...props.all.slice(0, props.cur),
+      arrTodos,
+      ...props.all.slice(props.cur + 1),
+    ]);
+  }, [array]);
   return (
     <div>
       <div>
