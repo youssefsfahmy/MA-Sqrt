@@ -12,6 +12,8 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { Height } from "@material-ui/icons";
 import AddBoxIcon from "@material-ui/icons/AddBox";
+import { useContext } from "react";
+import Titlecontext from "./Titlecontext";
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -26,9 +28,10 @@ const useStyles = makeStyles({
 });
 
 export default function Sidebar(props) {
+  const [title, setTitle] = useContext(Titlecontext);
   const classes = useStyles();
   const [key, setKey] = React.useState(0);
-  //   const [curr, setCurr] = React.useState(0);
+  //  const [curr, setCurr] = React.useState(0);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -47,6 +50,7 @@ export default function Sidebar(props) {
 
   const onClick2 = (e, id) => {
     props.setCur(id);
+    // setTitle(lists[props.cur].title);
   };
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -73,7 +77,7 @@ export default function Sidebar(props) {
         {lists.map((text, index) => (
           <ListItem button key={text.title} onClick={(e) => onClick2(e, index)}>
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <InboxIcon />
             </ListItemIcon>
             <ListItemText primary={text.title} />
           </ListItem>

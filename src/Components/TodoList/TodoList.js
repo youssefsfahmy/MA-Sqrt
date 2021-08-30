@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Textbox1 from "./Textbox1";
 import ExactlistNew from "./ExactListNew";
+import Titlecontext from "./Titlecontext";
 
 export default function TodoList(props) {
   console.log(props.cur);
   const [add, setAdd] = React.useState(false);
-  const [title, setTitle] = React.useState("Untitled");
+  const [title, setTitle] = useContext(Titlecontext);
   const [array, setArray] = React.useState(
     props.cur === -1 ? [] : props.all[props.cur]
   );
