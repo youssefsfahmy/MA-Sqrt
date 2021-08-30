@@ -10,7 +10,9 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-import { Height } from "@material-ui/icons";
+// import { Height } from "@material-ui/icons";
+import { AiOutlineUnorderedList } from "react-icons/ai";
+
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import { useContext } from "react";
 import Titlecontext from "./Titlecontext";
@@ -46,6 +48,7 @@ export default function Sidebar(props) {
       { title: "Untitled_" + key, key, arrTodos: [] },
     ]);
     setKey(key + 1);
+    // console.log(props.all)
   };
 
   const onClick2 = (e, id) => {

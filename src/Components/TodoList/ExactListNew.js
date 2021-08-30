@@ -13,7 +13,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 // import reactDom from 'react-dom';
 import DoneIcon from "@material-ui/icons/Done";
 // import Textbox1 from './Textbox1'
-import EditText from "./EditText";
+// import EditText from "./EditText";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,10 +29,10 @@ function CheckboxList(props) {
   // const [edited,setEdited]
 
   const handleDelete = (id) => {
-    console.log(id);
+    // console.log(id);
     props.setArrayy(props.arrayy.filter((elem) => elem.key !== id));
-    console.log("ay haga");
-    console.log(id);
+    // console.log("ay haga");
+    // console.log(id);
   };
   const onChange1 = (e, id) => {
     const elem = props.arrayy[id];

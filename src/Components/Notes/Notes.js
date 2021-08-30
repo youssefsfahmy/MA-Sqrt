@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Notes() {
   const classes = useStyles();
   const [arr, setArr] = React.useState([]);
-  const [el, setEl] = React.useState();
+  // const [el, setEl] = React.useState();
   const [button, setButton] = React.useState(false);
   const [id, setId] = React.useState(0);
   const [open, setOpen] = React.useState(false);
@@ -46,9 +46,9 @@ export default function Notes() {
   //     // Update the document title using the browser API
   //     setArr(arr)
   //   },[button])
-  const handleClick = () => {
-    setOpen(true);
-  };
+  // const handleClick = () => {
+  //   setOpen(true);
+  // };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
