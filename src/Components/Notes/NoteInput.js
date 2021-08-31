@@ -46,7 +46,7 @@ export default function NoteInput(props) {
         date:"",
         curDate:""
       });
-    const [note,setNote]=React.useState({title:"",content:""})
+    // const [note,setNote]=React.useState({title:"",content:""})
     const [expand,setExpand]=React.useState(false)
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });

@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import { createContext } from 'react';
+// import { createContext } from 'react';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,25 +33,24 @@ export default function BasicTextFields(props) {
      editMode: false
      
     }
-  
-    console.log(newTodo);
+    setText("")
+    // console.log(newTodo);
     props.setArrayy([...props.arrayy,newTodo])
 
   }
 
   const handleInputChange=(e) =>{
     setText(e.target.value)
-    console.log(e.target.value)
+    // console.log(e.target.value)
 }
   
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
      
-      <TextField id="filled-basic" label="" variant="filled" value={props.text} onChange={handleInputChange}  InputProps={{
+      <TextField id="filled-basic" label="" variant="filled" value={text} onChange={handleInputChange}  InputProps={{
           startAdornment: (
             <AddBoxIcon onClick={clickHandle} className="addbox" />
-
           ),
         }}/>
 
