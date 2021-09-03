@@ -18,7 +18,6 @@ export default function TodoList(props) {
     // console.log(props.cur + " " + arrTodos);
     // setArray(arrTodos);
     // console.log(props.all[props.cur].title)
-    console.log("hi", props.all);
     setTitle(props.all[props.cur].title);
     props.setAll([
       ...props.all.slice(0, props.cur),
@@ -28,19 +27,8 @@ export default function TodoList(props) {
   }, [array]);
   React.useEffect(() => {
     if (props.cur === -1) return;
-    // console.log(array);
-    // const arrTodos = props.cur === -1 ? [] : props.all[props.cur].arrTodos;
-    // console.log(props.cur + " " + arrTodos);
-    // setArray(arrTodos);
-    // console.log(props.all[props.cur].title)
-    // console.log("hi",props.all)
-    // setTitle(props.all[props.cur].title)
-    // props.setAll([
-    //   ...props.all.slice(0, props.cur),
-    //   {...props.all[props.cur],arrTodos:[...array]},
-    //   ...props.all.slice(props.cur + 1),
-    // ]);
     setArray(props.all[props.cur].arrTodos);
+   /// console.log(props.all[props.cur].arrTodos)
   }, [props.cur]);
   return (
     <div
