@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "./UserContext";
 
 export default function SignUp1(props) {
+  const [email, setEmail] = useContext(UserContext);
+  const [name, setName] = useContext(UserContext);
+
   return (
     <div
       style={{
@@ -40,6 +44,7 @@ export default function SignUp1(props) {
           width: "20vw",
         }}
         type="text"
+        onChange={(event) => setEmail(event.target.value)}
       />
       <div>
         <label
@@ -60,6 +65,7 @@ export default function SignUp1(props) {
           width: "20vw",
         }}
         type="text"
+        onChange={(event) => setName(event.target.value)}
       />
       <div>
         <button

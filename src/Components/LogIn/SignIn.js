@@ -6,12 +6,22 @@ import UserNamecontext from "../UserNamecontext";
 import { useHistory } from "react-router-dom";
 import user from "../UserNamecontext";
 import { useState } from "react";
+import axios from "axios";
+
 // import { History } from "history";
 export default function SignIn() {
+  const [email, setMail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [name, setName] = React.useState("");
   const [user, setUser] = useContext(UserNamecontext);
   const history = useHistory();
   function handlelogin() {
+    axios.post("localhost:8000/users/signin", {
+      User: {
+        email: email,
+        password: password,
+      },
+    });
     let path = "/";
     setUser(name);
     history.push(path);
@@ -55,7 +65,10 @@ export default function SignIn() {
           width: "20vw",
         }}
         type="text"
-        onChange={(event) => setName(event.target.value)}
+        onChange={
+          ((event) => setName(event.target.value),
+          (event) => setMail(event.target.value))
+        }
       />
       <div>
         <label
@@ -76,6 +89,7 @@ export default function SignIn() {
           width: "20vw",
         }}
         type="text"
+        onChange={(event) => setPassword(event.target.value)}
       />
       <div>
         <button

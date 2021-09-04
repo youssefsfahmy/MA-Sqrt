@@ -5,6 +5,8 @@ import homebgd from "../Homepagebgd.png";
 import { useContext } from "react";
 import UserNamecontext from "../Components/UserNamecontext";
 import NoteCard from "../Components/Notes/NoteCard";
+
+
 export default function Homepage() {
   const [user, setUser] = useContext(UserNamecontext);
   // console.log("User", user);

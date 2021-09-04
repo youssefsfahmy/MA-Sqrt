@@ -1,7 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import UserContext from "./UserContext";
+import axios from "axios";
 
 export default function SignUp2() {
+  const [email, setEmail] = useContext(UserContext);
+  const [name, setName] = useContext(UserContext);
+  const [userpass, setUserpass] = React.useState("");
+
+  function handleSignup() {
+    axios.post("localhost:8000/users/signin", {
+      User: {
+        email: email,
+        password: userpass,
+        name: name,
+      },
+    });
+  }
+
   return (
     <div
       style={{
@@ -107,13 +124,14 @@ export default function SignUp2() {
           width: "20vw",
         }}
         type="text"
+        onChange={(event) => setUserpass(event.target.value)}
       />
       <div>
         <Link to="/login">
           <button
-            // onClick={() => {
-            //   props.setButton(1);
-            // }}
+            onClick={{
+              handleSignup,
+            }}
             style={{
               border: "none",
               marginLeft: "5vw",
