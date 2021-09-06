@@ -4,6 +4,7 @@ import UserContext from "./UserContext";
 export default function SignUp1(props) {
   const [email, setEmail] = useContext(UserContext);
   const [name, setName] = useContext(UserContext);
+  const [userdet, setUserdet] = useContext(UserContext);
 
   return (
     <div
@@ -70,6 +71,10 @@ export default function SignUp1(props) {
       <div>
         <button
           onClick={() => {
+            setUserdet({
+              email: email,
+              name: name,
+            });
             props.setButton(1);
           }}
           style={{

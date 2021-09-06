@@ -15,16 +15,17 @@ export default function SignIn() {
   const [name, setName] = React.useState("");
   const [user, setUser] = useContext(UserNamecontext);
   const history = useHistory();
-  function handlelogin() {
-    axios.post("localhost:8000/users/signin", {
+  async function handlelogin() {
+    const response = await axios.post("http://localhost:8000/users/signin", {
       User: {
         email: email,
         password: password,
       },
     });
-    let path = "/";
-    setUser(name);
-    history.push(path);
+    console.log(response);
+    // let path = "/";
+    // setUser(name);
+    // history.push(path);
   }
   return (
     <div

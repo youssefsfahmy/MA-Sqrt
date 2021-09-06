@@ -5,16 +5,15 @@ import UserContext from "./UserContext";
 import axios from "axios";
 
 export default function SignUp2() {
-  const [email, setEmail] = useContext(UserContext);
-  const [name, setName] = useContext(UserContext);
+  const [userdet, setUserdet] = useContext(UserContext);
   const [userpass, setUserpass] = React.useState("");
 
   function handleSignup() {
-    axios.post("localhost:8000/users/signin", {
+    axios.post("localhost:8000/users/signup", {
       User: {
-        email: email,
+        email: userdet.email,
         password: userpass,
-        name: name,
+        name: userdet.name,
       },
     });
   }
