@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import UserInfo from "./UserContext";
+import axios from "axios";
 
 export default function SignUp1(props) {
   const [email, setEmail] = React.useState("");
@@ -11,13 +12,14 @@ export default function SignUp1(props) {
       email: email,
       name: name,
     });
-    const res = await axios.post("localhost:8000/users/signup1", {
+    const res = await axios.post("http://localhost:8000/users/signup1", {
       User: {
         email: userdet.email,
         name: userdet.name,
       },
     });
     console.log(res);
+    if(res.data.stat)
     props.setButton(1);
   }
 
