@@ -39,6 +39,9 @@ export default function TodoList(props) {
     if (props.cur === -1) return;
     setArray(props.all[props.cur].arrTodos);
   }, [props.cur]);
+
+
+
   return (
     <div
       style={{
