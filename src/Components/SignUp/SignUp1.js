@@ -1,10 +1,26 @@
 import React, { useContext } from "react";
 import UserContext from "./UserContext";
+import axios from "axios";
 
 export default function SignUp1(props) {
-  const [email, setEmail] = useContext(UserContext);
-  const [name, setName] = useContext(UserContext);
+  const [email, setEmail] = React.useState("");
+  const [name, setName] = React.useState("");
   const [userdet, setUserdet] = useContext(UserContext);
+
+  async function validatemail() {
+    setUserdet({
+      email: email,
+      name: name,
+    });
+    const res = await axios.post("localhost:8000/users/signup1", {
+      User: {
+        email: userdet.email,
+        name: userdet.name,
+      },
+    });
+    console.log(res);
+    props.setButton(1);
+  }
 
   return (
     <div
@@ -70,13 +86,7 @@ export default function SignUp1(props) {
       />
       <div>
         <button
-          onClick={() => {
-            setUserdet({
-              email: email,
-              name: name,
-            });
-            props.setButton(1);
-          }}
+          onClick={validatemail}
           style={{
             border: "none",
             marginLeft: "5vw",

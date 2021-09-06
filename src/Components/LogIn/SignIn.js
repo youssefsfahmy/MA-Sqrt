@@ -23,9 +23,9 @@ export default function SignIn() {
       },
     });
     console.log(response);
-    // let path = "/";
-    // setUser(name);
-    // history.push(path);
+    let path = "/";
+    setUser(name);
+    history.push(path);
   }
   return (
     <div
