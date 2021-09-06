@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
-import UserContext from "./UserContext";
-import axios from "axios";
+import UserInfo from "./UserContext";
 
 export default function SignUp1(props) {
   const [email, setEmail] = React.useState("");
   const [name, setName] = React.useState("");
-  const [userdet, setUserdet] = useContext(UserContext);
+  const [userdet, setUserdet] = useContext(UserInfo);
 
   async function validatemail() {
     setUserdet({
@@ -52,17 +51,21 @@ export default function SignUp1(props) {
         >
           E-mail{" "}
         </label>
+        <input
+          style={{
+            marginLeft: "5vw",
+            marginBottom: "2vw",
+            height: "2vw",
+            width: "20vw",
+          }}
+          type="text"
+          onChange={(event) => {
+            console.log("email", event.target.value);
+            setEmail(event.target.value);
+          }}
+        />
       </div>
-      <input
-        style={{
-          marginLeft: "5vw",
-          marginBottom: "2vw",
-          height: "2vw",
-          width: "20vw",
-        }}
-        type="text"
-        onChange={(event) => setEmail(event.target.value)}
-      />
+
       <div>
         <label
           style={{
@@ -73,17 +76,21 @@ export default function SignUp1(props) {
         >
           Full Name{" "}
         </label>
+        <input
+          style={{
+            marginLeft: "5vw",
+            marginBottom: "2vw",
+            height: "2vw",
+            width: "20vw",
+          }}
+          type="text"
+          onChange={(event) => {
+            console.log("name", event.target.value);
+            setName(event.target.value);
+          }}
+        />
       </div>
-      <input
-        style={{
-          marginLeft: "5vw",
-          marginBottom: "2vw",
-          height: "2vw",
-          width: "20vw",
-        }}
-        type="text"
-        onChange={(event) => setName(event.target.value)}
-      />
+
       <div>
         <button
           onClick={validatemail}
