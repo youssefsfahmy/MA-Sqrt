@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import Textbox1 from "./Textbox1";
 import ExactlistNew from "./ExactListNew";
 import Titlecontext from "./Titlecontext";
+import UserIdcontext from "../LogIn/UserIdcontext";
 
 export default function TodoList(props) {
   // console.log(props.cur);
+  const [userId, setUserId] = useContext(UserIdcontext);
   const [add, setAdd] = React.useState(false);
   const [title, setTitle] = useContext(Titlecontext);
   const [array, setArray] = React.useState(
@@ -28,7 +30,7 @@ export default function TodoList(props) {
   React.useEffect(() => {
     if (props.cur === -1) return;
     setArray(props.all[props.cur].arrTodos);
-   /// console.log(props.all[props.cur].arrTodos)
+    /// console.log(props.all[props.cur].arrTodos)
   }, [props.cur]);
   return (
     <div

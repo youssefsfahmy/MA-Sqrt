@@ -1,9 +1,10 @@
-import React from 'react'
+import { React, useContext, useState, useEffect } from 'react'
 import NoteCard from './NoteCard'
 import NoteInput from '../../Components/Notes/NoteInput'
 import { makeStyles } from '@material-ui/core/styles'
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert'
+import UserIdcontext from '../LogIn/UserIdcontext'
 import axios from 'axios'
 function Alert(props) {
   return <MuiAlert elevation={6} variant='filled' {...props} />
@@ -32,11 +33,12 @@ const useStyles = makeStyles((theme) => ({
 }))
 export default function Notes() {
   const classes = useStyles()
-  const [arr, setArr] = React.useState([])
-  const [button, setButton] = React.useState(false)
-  const [id, setId] = React.useState(0)
-  const [open, setOpen] = React.useState(false)
-  const [change, setChange] = React.useState(false)
+  const [arr, setArr] = useState([])
+  const [button, setButton] = useState(false)
+  const [id, setId] = useContext(UserIdcontext)
+  const [idnote, setIdNote] = useState(0)
+  const [open, setOpen] = useState(false)
+  const [change, setChange] = useState(false)
 
   console.log(arr)
   // React.useEffect(() => {
@@ -46,16 +48,19 @@ export default function Notes() {
   // const handleClick = () => {
   //   setOpen(true);
   // };
-  React.useEffect(() => {
+  useEffect(() => {
+    console.log('hola', id)
     axios
       .post(
         'http://localhost:8000/users/getmynotes',
         {},
-        { headers: { auth: 'ahahah' } }
+        { headers: { auth: id } }
       )
       .then((res) => {
         console.log(res.data)
+        setArr(res.data.data)
       })
+      .catch((err) => console.log(err))
   }, [change])
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -72,8 +77,8 @@ export default function Notes() {
         setArr={setArr}
         setButton={setButton}
         button={button}
-        id={id}
-        setId={setId}
+        id={idnote}
+        setId={setIdNote}
         setOpen={setOpen}
       />
       <div className={classes.notes}>
