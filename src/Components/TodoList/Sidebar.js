@@ -10,6 +10,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import DeleteIcon from "@material-ui/icons/Delete";
+
 // import { Height } from "@material-ui/icons";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 
@@ -30,6 +32,9 @@ const useStyles = makeStyles({
 });
 
 export default function Sidebar(props) {
+
+
+
   const [title, setTitle] = useContext(Titlecontext);
   const classes = useStyles();
   const [key, setKey] = React.useState(0);
@@ -40,16 +45,24 @@ export default function Sidebar(props) {
     bottom: false,
     right: false,
   });
-  const [lists, setLists] = React.useState([]);
+ /// const [lists, setLists] = React.useState([]);
   const onClick = () => {
-    setLists([...lists, { title: "Untitled_" + key, key }]);
+  ///  setLists([...lists, { title: "Untitled_" + key, key }]);
     props.setAll([
       ...props.all,
       { title: "Untitled_" + key, key, arrTodos: [] },
     ]);
     setKey(key + 1);
-    // console.log(props.all)
+    //console.log(props.all)
   };
+  const handleDelete = (id,index) => {
+    
+    props.setAll([...props.all.filter((elem) => elem.key !== id)]);
+    console.log(index ,"  ", props.cur)
+    // if(index === props.cur)
+    //    props.setCur(index+0)
+    console.log()
+  }
 
   const onClick2 = (e, id) => {
     props.setCur(id);
@@ -63,6 +76,7 @@ export default function Sidebar(props) {
     ) {
       return;
     }
+  
 
     setState({ ...state, [anchor]: open });
   };
@@ -77,12 +91,13 @@ export default function Sidebar(props) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {lists.map((text, index) => (
-          <ListItem button key={text.title} onClick={(e) => onClick2(e, index)}>
-            <ListItemIcon>
-              <InboxIcon />
+        {props.all.map((object, index) => (
+          <ListItem button key={object.title} >
+            <ListItemIcon >
+              <DeleteIcon onClick={() => handleDelete(object.key,index)}
+                id={object.key}/>
             </ListItemIcon>
-            <ListItemText primary={text.title} />
+            <ListItemText onClick={(e) => onClick2(e, index)} primary={object.title} />
           </ListItem>
         ))}
       </List>

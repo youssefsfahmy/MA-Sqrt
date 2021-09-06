@@ -18,7 +18,7 @@ export default function Todo() {
         }}
       >
         <Sidebar all={all} setAll={setAll} cur={cur} setCur={setCur} />
-        <TodoList all={all} setAll={setAll} cur={cur} />
+        <TodoList all={all} setAll={setAll} cur={cur} setCur={setCur} />
       </div>
     </div>
   );
