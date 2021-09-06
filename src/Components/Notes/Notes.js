@@ -39,17 +39,9 @@ export default function Notes() {
   const [idnote, setIdNote] = useState(0)
   const [open, setOpen] = useState(false)
   const [change, setChange] = useState(false)
-
-  console.log(arr)
-  // React.useEffect(() => {
-  //     // Update the document title using the browser API
-  //     setArr(arr)
-  //   },[button])
-  // const handleClick = () => {
-  //   setOpen(true);
-  // };
+  const [popup, setPopup] = useState({ message: '', severity: '' })
   useEffect(() => {
-    console.log('hola', id)
+    // console.log('hola', id)
     axios
       .post(
         'http://localhost:8000/users/getmynotes',
@@ -57,16 +49,15 @@ export default function Notes() {
         { headers: { auth: id } }
       )
       .then((res) => {
-        console.log(res.data)
-        setArr(res.data.data)
+        console.log(res.data.data)
+        if (res.data.data) setArr(res.data.data)
       })
       .catch((err) => console.log(err))
-  }, [change])
+  }, [change, id])
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
     }
-
     setOpen(false)
   }
   return (
@@ -80,22 +71,23 @@ export default function Notes() {
         id={idnote}
         setId={setIdNote}
         setOpen={setOpen}
+        setPopup={setPopup}
+        setChange={setChange}
+        change={change}
       />
       <div className={classes.notes}>
-        {/* {arr.map((elem,index) => (
-          <NoteCard arr={arr} setArr={setArr} elem={elem} index={index} />
-        ))} */}
         {arr.filter((e) => e.isPinned).length === 0 ? (
           <div className={classes.noteSection}>
             {arr
-              .sort((a, b) => b.curDate - a.curDate)
+              .sort((a, b) => b.lastEdited - a.lastEdited)
               .map((elem, index) => (
                 <NoteCard
-                  arr={arr}
-                  setArr={setArr}
+                  noteId={elem.id}
                   elem={elem}
-                  index={index}
                   setOpen={setOpen}
+                  setPopup={setPopup}
+                  setChange={setChange}
+                  change={change}
                 />
               ))}
           </div>
@@ -104,15 +96,16 @@ export default function Notes() {
             <h2 className={classes.noteSection}>Pinned</h2>
             <div className={classes.noteSection}>
               {arr
-                .sort((a, b) => b.curDate - a.curDate)
+                .sort((a, b) => b.lastEdited - a.lastEdited)
                 .map((elem, index) =>
                   elem.isPinned ? (
                     <NoteCard
-                      arr={arr}
-                      setArr={setArr}
+                      noteId={elem.id}
                       elem={elem}
-                      index={index}
                       setOpen={setOpen}
+                      setPopup={setPopup}
+                      setChange={setChange}
+                      change={change}
                     />
                   ) : (
                     <></>
@@ -126,15 +119,16 @@ export default function Notes() {
             )}
             <div className={classes.noteSection}>
               {arr
-                .sort((a, b) => b.curDate - a.curDate)
+                .sort((a, b) => b.lastEdited - a.lastEdited)
                 .map((elem, index) =>
                   !elem.isPinned ? (
                     <NoteCard
-                      arr={arr}
-                      setArr={setArr}
+                      noteId={elem.id}
                       elem={elem}
-                      index={index}
+                      setPopup={setPopup}
                       setOpen={setOpen}
+                      setChange={setChange}
+                      change={change}
                     />
                   ) : (
                     <></>
@@ -145,21 +139,11 @@ export default function Notes() {
         )}
       </div>
       <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-        <Alert
-          onClose={handleClose}
-          severity={open === 1 || open === 4 ? 'success' : 'error'}
-        >
-          {open === 1 ? (
-            <>Note added successfully</>
-          ) : open === 2 ? (
-            <>Cannot add an empty note</>
-          ) : open === 3 ? (
-            <>Cannot have an empty note</>
-          ) : (
-            <>Note updated successfully</>
-          )}
+        <Alert onClose={handleClose} severity={popup.severity}>
+          {popup.message}
         </Alert>
       </Snackbar>
+
       {/* <Snackbar open={open4} autoHideDuration={2000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Note updated successfully
