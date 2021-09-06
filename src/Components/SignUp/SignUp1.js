@@ -1,11 +1,27 @@
 import React, { useContext } from "react";
 import UserInfo from "./UserContext";
 import axios from "axios";
+import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export default function SignUp1(props) {
   const [email, setEmail] = React.useState("");
   const [name, setName] = React.useState("");
   const [userdet, setUserdet] = useContext(UserInfo);
+
+  const [open, setOpen] = React.useState(false); //snackbar
+  const [popup, setPopup] = React.useState({ message: "", severity: "" });
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   async function validatemail() {
     setUserdet({
@@ -19,8 +35,13 @@ export default function SignUp1(props) {
       },
     });
     console.log(res);
-    if(res.data.stat)
-    props.setButton(1);
+    if (res.data.statusCode === 0) {
+      props.setButton(1);
+      console.log("button");
+    } else {
+      setPopup({ message: res.data.message, severity: "error" });
+      setOpen(true);
+    }
   }
 
   return (
@@ -111,6 +132,11 @@ export default function SignUp1(props) {
           NEXT
         </button>
       </div>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={popup.severity}>
+          {popup.message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
