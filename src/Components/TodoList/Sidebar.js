@@ -1,4 +1,4 @@
-import React from "react";
+import React,{   useState, useEffect } from 'react'
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
@@ -18,6 +18,8 @@ import { AiOutlineUnorderedList } from "react-icons/ai";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import { useContext } from "react";
 import Titlecontext from "./Titlecontext";
+import axios from "axios";
+import { IconButton } from 'material-ui';
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -34,12 +36,11 @@ const useStyles = makeStyles({
 export default function Sidebar(props) {
 
 
-
   const [title, setTitle] = useContext(Titlecontext);
   const classes = useStyles();
-  const [key, setKey] = React.useState(0);
+  const [key, setKey] = useState(0);
   //  const [curr, setCurr] = React.useState(0);
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     top: false,
     left: false,
     bottom: false,
@@ -47,27 +48,45 @@ export default function Sidebar(props) {
   });
  /// const [lists, setLists] = React.useState([]);
   const onClick = () => {
-  ///  setLists([...lists, { title: "Untitled_" + key, key }]);
-    props.setAll([
-      ...props.all,
-      { title: "Untitled_" + key, key, arrTodos: [] },
-    ]);
-    setKey(key + 1);
-    //console.log(props.all)
+
+     axios.post('http://localhost:8000/todolist/addnewlist' , {
+    Todolist:  {
+    title : "Untitled"
+    }
+      }
+    , { headers: { auth: window.localStorage.getItem('auth') } }).then((res)=> {
+      if(res.data.statusCode===0) props.setChange(!props.change)
+    }) .catch((err) => console.log(err))
   };
-  const handleDelete = (id,index) => {
-    
-    props.setAll([...props.all.filter((elem) => elem.key !== id)]);
-    console.log(index ,"  ", props.cur)
-    // if(index !== props.cur)
-       props.setCur(props.cur - 1)
-    console.log()
+  const handleDelete = (id2) => {
+      console.log("maya masalan" , id2)
+    axios.post('http://localhost:8000/todolist/deletelist' , {
+        
+      id: id2
+      
+        }
+      , { headers: { auth: window.localStorage.getItem('auth') } }).then((res)=> {
+        console.log(res)
+        if(res.data.statusCode===0) props.setChange(!props.change)
+      }) .catch((err) => console.log(err))
+
+
+
+    // props.setAll([...props.all.filter((elem) => elem.key !== id)]);
+    // console.log(index ,"  ", props.cur)
+    // // if(index !== props.cur)
+    //    props.setCur(props.cur - 1)
+    // console.log()
+    // props.setChange(!props.change)
   }
 
   const onClick2 = (e, id) => {
+
     console.log("hi", id)
-    console.log(props.all)
-    props.setCur(id);
+     console.log(props.all)
+    // props.setCur(id);
+    props.setCurId(id)
+    props.setChange(!props.change)
     // setTitle(lists[props.cur].title);
   };
   const toggleDrawer = (anchor, open) => (event) => {
@@ -93,14 +112,14 @@ export default function Sidebar(props) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {props.all.map((object, index) => (
-          <ListItem button key={object.title} >
-            <ListItemIcon >
-              <DeleteIcon onClick={() => handleDelete(object.key,index)}
-                id={object.key}/>
+        {props.all.map((elem, index) => (<>
+          <ListItem button key={elem.title} >
+            <ListItemIcon onClick={()=> handleDelete(elem._id)} >
+            <DeleteIcon />
             </ListItemIcon>
-            <ListItemText onClick={(e) => onClick2(e, index)} primary={object.title} />
+           <ListItemText onClick={(e) => onClick2(e, elem._id)} primary={elem.title} />
           </ListItem>
+           </>
         ))}
       </List>
       <Divider />

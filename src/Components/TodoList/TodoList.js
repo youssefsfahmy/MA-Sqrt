@@ -25,7 +25,6 @@ export default function TodoList(props) {
   const [open, setOpen] = React.useState(false); //snackbar
   const [popup, setPopup] = React.useState({ message: "", severity: "" });
 
-
 console.log(props);
 
   const editTitleHandle=() => {
@@ -48,7 +47,7 @@ console.log(props);
 
 
   const [array, setArray] = React.useState(
-    props.cur === -1 ? [] : props.all[props.cur].arrTodos
+    props.cur === -1 ? [] : props.all[props.cur].todos
   );
 
   React.useEffect(() => {
@@ -63,13 +62,13 @@ console.log(props);
     setTitle(props.all[props.cur].title);
     props.setAll([
       ...props.all.slice(0, props.cur),
-      { ...props.all[props.cur], arrTodos: [...array] },
+      { ...props.all[props.cur], todos: [...array] },
       ...props.all.slice(props.cur + 1),
     ]);
   }, [array, id]);
   React.useEffect(() => {
     if (props.cur === -1) return;
-    setArray(props.all[props.cur].arrTodos);
+    setArray(props.all[props.cur].todos);
   }, [props.cur]);
 
 
@@ -82,6 +81,7 @@ console.log(props);
       //   top: "7vw",  
       // }}
     >
+      {props.curId!==''?<>
       <div>
        {title.editMode ? 
        <>
@@ -90,18 +90,18 @@ console.log(props);
          <DoneIcon onClick={handleClick2}/>
          </div>
          </> 
-       :<h1 onClick ={editTitleHandle}>{props.cur === -1 ? 'Choose a list' :title.title2}</h1>
+       :<h1 onClick ={editTitleHandle}>{title.title2}</h1>
       //  <h1 onClick ={editTitleHandle}>{props.cur === -1 ? 'Choose a list' :title}</h1>
        }
       </div>
       <div className="capitalDiv">
         <div className="divMain">
-          <Textbox1 setaddd={setAdd} setArrayy={setArray} arrayy={array} />
+          <Textbox1 setaddd={setAdd} setArrayy={setArray} arrayy={array} curId={props.curId} setCurId={props.setCurId} />
         </div>
         <div>
-          <ExactlistNew arrayy={array} setArrayy={setArray} />
+          <ExactlistNew all={props.all} setAll={props.setAll} arrayy={array} setArrayy={setArray}  curId={props.curId} setCurId={props.setCurId}/>
         </div>
-      </div>
+      </div></>:<h1>choose a list</h1>}
       <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
         <Alert onClose={handleClose} severity={popup.severity}>
           {popup.message}

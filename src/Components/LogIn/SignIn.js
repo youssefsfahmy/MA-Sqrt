@@ -38,8 +38,11 @@ export default function SignIn() {
       User: {
         email: email,
         password: password,
+       
       },
+
     });
+    console.log(response.headers.auth)
     console.log("hi", response);
     if (response.data.statusCode === 0) {
       console.log('alooo',response.headers)
