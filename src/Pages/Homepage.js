@@ -8,15 +8,18 @@ import NoteCard from "../Components/Notes/NoteCard";
 import axios from "axios";
 
 export default function Homepage() {
-  const [user, setUser] = useContext(UserNamecontext);
+  const [user, setUser] = React.useState("");
   useEffect(() => {
     // console.log('hola', id)
     axios
-      .post("http://localhost:8000/users/userdetails", {
-        headers: { auth: window.localStorage.getItem("auth") },
-      })
+      .post(
+        "http://localhost:8000/users/userdetails",
+        {},
+        { headers: { auth: window.localStorage.getItem("auth") } }
+      )
       .then((res) => {
-        console.log(res);
+        console.log(res.data.user.name);
+        setUser(res.data.user.name);
         // if (res.data.data) setArr(res.data.data)
       })
       .catch((err) => console.log(err));
