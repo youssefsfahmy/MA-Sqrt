@@ -59,12 +59,14 @@ export default function Sidebar(props) {
     
     props.setAll([...props.all.filter((elem) => elem.key !== id)]);
     console.log(index ,"  ", props.cur)
-    // if(index === props.cur)
-    //    props.setCur(index+0)
+    // if(index !== props.cur)
+       props.setCur(props.cur - 1)
     console.log()
   }
 
   const onClick2 = (e, id) => {
+    console.log("hi", id)
+    console.log(props.all)
     props.setCur(id);
     // setTitle(lists[props.cur].title);
   };
