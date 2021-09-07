@@ -42,7 +42,7 @@ export default function SignIn() {
     });
     console.log("hi", response);
     if (response.data.statusCode === 0) {
-      console.log(response.headers)
+      console.log('alooo',response.headers)
       // setId(response.headers.auth)
       window.localStorage.setItem('auth', response.headers.auth)
       setPopup({ message: response.data.message, severity: 'success' })

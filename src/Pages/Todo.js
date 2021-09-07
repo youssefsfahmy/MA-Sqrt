@@ -1,12 +1,26 @@
-import React from "react";
+import { React, useContext, useState, useEffect } from 'react'
 import Sidebar from "../Components/TodoList/Sidebar";
 import TodoList from "../Components/TodoList/TodoList";
 import NavBar from "../Components/HomePage/NavBar";
+import axios from 'axios'
 
 export default function Todo() {
-  const [all, setAll] = React.useState([]);
-  const [cur, setCur] = React.useState(-1);
+  const [all, setAll] = useState([]);
+  const [cur, setCur] = useState(-1);
+  const [change, setChange] = useState(false)
+
   // console.log(all[cur]);
+
+  useEffect(() => {
+    axios.post('http://localhost:8000/users/getmylists',{}, { headers: { auth: window.localStorage.getItem('auth') } } )
+    .then((res) => {
+      if (res) console.log(res)
+    })
+    .catch((err) => console.log(err))
+
+      
+    }
+  , [change])
   return (
     <div>
       <div>

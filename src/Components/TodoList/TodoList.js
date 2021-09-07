@@ -52,12 +52,11 @@ console.log(props);
   );
 
   React.useEffect(() => {
-    axios.post('http://localhost:8000/todo/todos' , {} , {headers :{ auth: id }})
-    .then((res) => {
-      // console.log(res.data.data)
-      if (res.data.data) setArray(res.data.data)
-    })
-    .catch((err) => console.log(err))
+    // axios.post('http://localhost:8000/todo/todos' , {} , {headers :{ auth: id }})
+    // .then((res) => {
+    //   if (res.data.data) setArray(res.data.data)
+    // })
+    // .catch((err) => console.log(err))
 
 
     if (props.cur === -1) return;
