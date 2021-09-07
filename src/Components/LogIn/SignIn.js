@@ -9,7 +9,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import MuiAlert from '@material-ui/lab/Alert'
 import Snackbar from '@material-ui/core/Snackbar'
-import UserIdcontext from './UserIdcontext'
+// import UserIdcontext from './UserIdcontext'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant='filled' {...props} />
@@ -20,7 +20,7 @@ export default function SignIn() {
   const [password, setPassword] = React.useState('')
   const [name, setName] = React.useState('')
   const [user, setUser] = useContext(UserNamecontext)
-  const [id, setId] = useContext(UserIdcontext)
+  // const [id, setId] = useContext(UserIdcontext)
   const history = useHistory()
 
   const [open, setOpen] = React.useState(false) //snackbar
@@ -43,7 +43,8 @@ export default function SignIn() {
     // console.log('hi', response)
     if (response.data.statusCode === 0) {
       console.log(response.headers)
-      setId(response.headers.auth)
+      // setId(response.headers.auth)
+      window.localStorage.setItem('auth', response.headers.auth)
       setPopup({ message: response.data.message, severity: 'success' })
       setOpen(true)
       setTimeout(() => {
