@@ -15,11 +15,12 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import axios from 'axios'
-import UserIdcontext from '../LogIn/UserIdcontext'
+// import UserIdcontext from '../LogIn/UserIdcontext'
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
     margin: '1vw',
+    height: 'fit-content',
   },
   media: {
     height: 0,
@@ -70,7 +71,7 @@ export default function NoteCard(props) {
     content: props.elem.content,
     isPinned: props.elem.isPinned,
   })
-  const [id, setId] = React.useContext(UserIdcontext)
+  // const [id, setId] = React.useContext(UserIdcontext)
   React.useEffect(() => {
     setNoteValues({
       id: props.noteId,
@@ -89,7 +90,7 @@ export default function NoteCard(props) {
         'http://localhost:8000/notes/deletenote',
         { id: noteValues.id },
         {
-          headers: { auth: id },
+          headers: { auth: window.localStorage.getItem('auth') },
         }
       )
       .then((res) => {
@@ -112,7 +113,7 @@ export default function NoteCard(props) {
         'http://localhost:8000/notes/updatenote',
         { ...noteValues, isPinned: !noteValues.isPinned },
         {
-          headers: { auth: id },
+          headers: { auth: window.localStorage.getItem('auth') },
         }
       )
       .then((res) => {
@@ -149,7 +150,7 @@ export default function NoteCard(props) {
   const handleClose = () => {
     axios
       .post('http://localhost:8000/notes/updatenote', noteValues, {
-        headers: { auth: id },
+        headers: { auth: window.localStorage.getItem('auth') },
       })
       .then((res) => {
         if (res.data.statusCode === 0) {
@@ -177,7 +178,7 @@ export default function NoteCard(props) {
             </IconButton>
           }
           title={props.elem.title}
-          subheader={props.elem.lastEdited}
+          subheader={format(new Date(props.elem.lastEdited))}
         />
         <CardContent onClick={handleClickOpen} className={classes.noteContent}>
           <p className={classes.pp}>{props.elem.content}</p>

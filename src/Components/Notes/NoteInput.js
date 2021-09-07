@@ -7,7 +7,7 @@ import FormControl from '@material-ui/core/FormControl'
 import Card from '@material-ui/core/Card'
 import AddBoxIcon from '@material-ui/icons/AddBox'
 import axios from 'axios'
-import UserIdcontext from '../LogIn/UserIdcontext'
+// import UserIdcontext from '../LogIn/UserIdcontext'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +37,7 @@ export default function NoteInput(props) {
     title: '',
     content: '',
   })
-  const [id, setId] = React.useContext(UserIdcontext)
+  // const [id, setId] = React.useContext(UserIdcontext)
 
   // const [note,setNote]=React.useState({title:"",content:""})
   const [expand, setExpand] = React.useState(false)
@@ -58,7 +58,7 @@ export default function NoteInput(props) {
       .post(
         'http://localhost:8000/notes/addnote',
         { Note: values },
-        { headers: { auth: id } }
+        { headers: { auth: window.localStorage.getItem('auth') } }
       )
       .then((res) => {
         // console.log(res.data.data)
@@ -92,7 +92,7 @@ export default function NoteInput(props) {
               id='outlined-adornment-amount'
               value={values.title}
               onChange={handleChange('title')}
-              labelWidth={60}
+              // labelWidth={60}
               autoComplete={'off'}
             />
           </FormControl>

@@ -4,7 +4,7 @@ import NoteInput from '../../Components/Notes/NoteInput'
 import { makeStyles } from '@material-ui/core/styles'
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert'
-import UserIdcontext from '../LogIn/UserIdcontext'
+// import UserIdcontext from '../LogIn/UserIdcontext'
 import axios from 'axios'
 function Alert(props) {
   return <MuiAlert elevation={6} variant='filled' {...props} />
@@ -35,7 +35,7 @@ export default function Notes() {
   const classes = useStyles()
   const [arr, setArr] = useState([])
   const [button, setButton] = useState(false)
-  const [id, setId] = useContext(UserIdcontext)
+  // const [id, setId] = useContext(UserIdcontext)
   const [idnote, setIdNote] = useState(0)
   const [open, setOpen] = useState(false)
   const [change, setChange] = useState(false)
@@ -46,14 +46,14 @@ export default function Notes() {
       .post(
         'http://localhost:8000/users/getmynotes',
         {},
-        { headers: { auth: id } }
+        { headers: { auth: window.localStorage.getItem('auth') } }
       )
       .then((res) => {
         console.log(res.data.data)
         if (res.data.data) setArr(res.data.data)
       })
       .catch((err) => console.log(err))
-  }, [change, id])
+  }, [change])
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
@@ -79,7 +79,7 @@ export default function Notes() {
         {arr.filter((e) => e.isPinned).length === 0 ? (
           <div className={classes.noteSection}>
             {arr
-              .sort((a, b) => b.lastEdited - a.lastEdited)
+              .sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited))
               .map((elem, index) => (
                 <NoteCard
                   noteId={elem.id}
@@ -96,7 +96,7 @@ export default function Notes() {
             <h2 className={classes.noteSection}>Pinned</h2>
             <div className={classes.noteSection}>
               {arr
-                .sort((a, b) => b.lastEdited - a.lastEdited)
+                .sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited))
                 .map((elem, index) =>
                   elem.isPinned ? (
                     <NoteCard
@@ -119,7 +119,7 @@ export default function Notes() {
             )}
             <div className={classes.noteSection}>
               {arr
-                .sort((a, b) => b.lastEdited - a.lastEdited)
+                .sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited))
                 .map((elem, index) =>
                   !elem.isPinned ? (
                     <NoteCard
