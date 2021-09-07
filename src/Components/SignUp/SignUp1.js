@@ -28,10 +28,11 @@ export default function SignUp1(props) {
       email: email,
       name: name,
     });
+    console.log(userdet.name + " lol " + userdet.email);
     const res = await axios.post("http://localhost:8000/users/signup1", {
       User: {
-        email: userdet.email,
-        name: userdet.name,
+        email: email,
+        name: name,
       },
     });
     console.log(res);
@@ -39,7 +40,7 @@ export default function SignUp1(props) {
       props.setButton(1);
       console.log("button");
     } else {
-      setPopup({ message: res.data.message, severity: "error" });
+      setPopup({ message: res.data.error, severity: "error" });
       setOpen(true);
     }
   }
@@ -74,20 +75,20 @@ export default function SignUp1(props) {
         >
           E-mail{" "}
         </label>
-        <input
-          style={{
-            marginLeft: "5vw",
-            marginBottom: "2vw",
-            height: "2vw",
-            width: "20vw",
-          }}
-          type="text"
-          onChange={(event) => {
-            console.log("email", event.target.value);
-            setEmail(event.target.value);
-          }}
-        />
       </div>
+      <input
+        style={{
+          marginLeft: "5vw",
+          marginBottom: "2vw",
+          height: "2vw",
+          width: "20vw",
+        }}
+        type="text"
+        onChange={(event) => {
+          console.log("email", event.target.value);
+          setEmail(event.target.value);
+        }}
+      />
 
       <div>
         <label
@@ -97,22 +98,22 @@ export default function SignUp1(props) {
             paddingLeft: "5vw",
           }}
         >
-          Full Name{" "}
+          Username{" "}
         </label>
-        <input
-          style={{
-            marginLeft: "5vw",
-            marginBottom: "2vw",
-            height: "2vw",
-            width: "20vw",
-          }}
-          type="text"
-          onChange={(event) => {
-            console.log("name", event.target.value);
-            setName(event.target.value);
-          }}
-        />
       </div>
+      <input
+        style={{
+          marginLeft: "5vw",
+          marginBottom: "2vw",
+          height: "2vw",
+          width: "20vw",
+        }}
+        type="text"
+        onChange={(event) => {
+          console.log("name", event.target.value);
+          setName(event.target.value);
+        }}
+      />
 
       <div>
         <button
