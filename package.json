@@ -9,11 +9,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-<<<<<<< HEAD
     "axios": "^0.21.3",
-=======
-    "axios": "^0.21.1",
->>>>>>> 53eebfd38e140ff41642eda9d850e4be3d9750ba
     "bootstrap": "^5.1.0",
     "dom": "0.0.3",
     "material-ui": "^0.20.2",

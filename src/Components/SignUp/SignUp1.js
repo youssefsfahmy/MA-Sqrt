@@ -30,8 +30,8 @@ export default function SignUp1(props) {
     });
     const res = await axios.post("http://localhost:8000/users/signup1", {
       User: {
-        email: userdet.email,
-        name: userdet.name,
+        email: email,
+        name: name,
       },
     });
     console.log(res);
@@ -39,7 +39,7 @@ export default function SignUp1(props) {
       props.setButton(1);
       console.log("button");
     } else {
-      setPopup({ message: res.data.message, severity: "error" });
+      setPopup({ message: res.data.error, severity: "error" });
       setOpen(true);
     }
   }
