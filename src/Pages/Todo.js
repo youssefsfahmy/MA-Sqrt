@@ -12,6 +12,7 @@ export default function Todo() {
   // console.log(all[cur]);
 
   useEffect(() => {
+    console.log('effect')
     axios.post('http://localhost:8000/users/getmylists',{}, { headers: { auth: window.localStorage.getItem('auth') } } )
     .then((res) => {
       if (res) console.log(res)
