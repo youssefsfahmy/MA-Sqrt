@@ -18,6 +18,7 @@ import axios from 'axios'
 // import UserIdcontext from '../LogIn/UserIdcontext'
 const useStyles = makeStyles((theme) => ({
   root: {
+    resize:"none",
     maxWidth: 345,
     margin: '1vw',
     height: 'fit-content',

@@ -46,6 +46,7 @@ export default function Notes() {
       .post(
         'http://localhost:8000/users/getmynotes',
         {},
+        
         { headers: { auth: window.localStorage.getItem('auth') } }
       )
       .then((res) => {

@@ -1,14 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import createContext from 'react'
-import { useContext } from 'react'
-import UserNamecontext from '../UserNamecontext'
-import { useHistory } from 'react-router-dom'
-import user from '../UserNamecontext'
-import { useState } from 'react'
-import axios from 'axios'
-import MuiAlert from '@material-ui/lab/Alert'
-import Snackbar from '@material-ui/core/Snackbar'
+import React from "react";
+import { Link } from "react-router-dom";
+import createContext from "react";
+import { useContext } from "react";
+import UserNamecontext from "../UserNamecontext";
+import { useHistory } from "react-router-dom";
+import user from "../UserNamecontext";
+import { useState } from "react";
+import axios from "axios";
+import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
 // import UserIdcontext from './UserIdcontext'
 
 function Alert(props) {
@@ -16,12 +16,12 @@ function Alert(props) {
 }
 // import { History } from "history";
 export default function SignIn() {
-  const [email, setMail] = React.useState('')
-  const [password, setPassword] = React.useState('')
-  const [name, setName] = React.useState('')
-  const [user, setUser] = useContext(UserNamecontext)
+  const [email, setMail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [user, setUser] = useContext(UserNamecontext);
   // const [id, setId] = useContext(UserIdcontext)
-  const history = useHistory()
+  const history = useHistory();
 
   const [open, setOpen] = React.useState(false); //snackbar
   const [popup, setPopup] = React.useState({ message: "", severity: "" });
@@ -42,11 +42,11 @@ export default function SignIn() {
     });
     console.log("hi", response);
     if (response.data.statusCode === 0) {
-      console.log(response.headers)
+      console.log(response.headers);
       // setId(response.headers.auth)
-      window.localStorage.setItem('auth', response.headers.auth)
-      setPopup({ message: response.data.message, severity: 'success' })
-      setOpen(true)
+      window.localStorage.setItem("auth", response.headers.auth);
+      setPopup({ message: response.data.message, severity: "success" });
+      setOpen(true);
       setTimeout(() => {
         let path = "/home";
         setUser(name);
@@ -114,13 +114,13 @@ export default function SignIn() {
         </label>
       </div>
       <input
+        type="password"
         style={{
           marginLeft: "5vw",
           marginBottom: "2vw",
           height: "2vw",
           width: "20vw",
         }}
-        type="text"
         onChange={(event) => setPassword(event.target.value)}
       />
       <div>
