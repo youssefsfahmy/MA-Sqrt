@@ -82,7 +82,7 @@ export default function SignUp2() {
           height: "2vw",
           width: "20vw",
         }}
-        type="text"
+        type="password"
       />
       <div
         style={{
@@ -149,7 +149,7 @@ export default function SignUp2() {
           height: "2vw",
           width: "20vw",
         }}
-        type="text"
+        type="password"
         onChange={(event) => setUserpass(event.target.value)}
       />
       {/* <div> */}

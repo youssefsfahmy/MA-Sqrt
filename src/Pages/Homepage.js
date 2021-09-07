@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "../Components/HomePage/NavBar";
 import homebgd from "../Homepagebgd.png";
 // import { height } from "@material-ui/system";
 import { useContext } from "react";
 import UserNamecontext from "../Components/UserNamecontext";
 import NoteCard from "../Components/Notes/NoteCard";
+import axios from "axios";
 
 export default function Homepage() {
-  const [user, setUser] = useContext(UserNamecontext);
-  // console.log("User", user);
+  const [user, setUser] = React.useState("");
+  useEffect(() => {
+    // console.log('hola', id)
+    axios
+      .post(
+        "http://localhost:8000/users/userdetails",
+        {},
+        { headers: { auth: window.localStorage.getItem("auth") } }
+      )
+      .then((res) => {
+        console.log(res.data.user.name);
+        setUser(res.data.user.name);
+        // if (res.data.data) setArr(res.data.data)
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div>
       <NavBar />
@@ -38,9 +54,13 @@ export default function Homepage() {
           Welcome Back,{user}
         </h1>
       </div>
-      <div>
+      <div
+        style={{
+          display: "flex",
+        }}
+      >
         <div style={{ textAlign: "-webkit-center" }}>
-          <h1 style={{ marginTop: "35vh" }}>Latest Notes</h1>
+          <h1 style={{ marginTop: "10vh" }}>Latest Notes</h1>
           {/* id:"",
         title:"",
         content:"",
