@@ -1,63 +1,65 @@
-import React, { useContext } from "react";
-import NoteCard from "./NoteCard";
-import NoteInput from "../../Components/Notes/NoteInput";
-import { makeStyles } from "@material-ui/core/styles";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-import UserIdcontext from "../LogIn/UserIdcontext";
+import { React, useContext, useState, useEffect } from 'react'
+import NoteCard from './NoteCard'
+import NoteInput from '../../Components/Notes/NoteInput'
+import { makeStyles } from '@material-ui/core/styles'
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert'
+import UserIdcontext from '../LogIn/UserIdcontext'
+import axios from 'axios'
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} variant='filled' {...props} />
 }
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     // justifyContent: "center",
-    minHeight: "100vh",
-    backgroundColor: "mintcream",
+    minHeight: '100vh',
+    backgroundColor: 'mintcream',
   },
   notes: {
     // display: "flex",
     // flexWrap: "wrap",
-    marginTop: "3vw",
+    marginTop: '3vw',
     // placeContent:"center",
     // alignItems:"center"
   },
   noteSection: {
-    display: "flex",
-    flexWrap: "wrap",
-    placeContent: "center",
+    display: 'flex',
+    flexWrap: 'wrap',
+    placeContent: 'center',
   },
-}));
+}))
 export default function Notes() {
-  const classes = useStyles();
-  const [arr, setArr] = React.useState([]);
-  // const [el, setEl] = React.useState();
-  const [button, setButton] = React.useState(false);
-  const [userId, setUserId] = useContext(UserIdcontext);
-  const [id, setId] = React.useState(0);
-  const [open, setOpen] = React.useState(false);
-  //   const [open2, setOpen2] = React.useState(false);
-  //   const [open3, setOpen3] = React.useState(false);
-  //   const [open4, setOpen4] = React.useState(false);
-
-  console.log(arr);
-  // React.useEffect(() => {
-  //     // Update the document title using the browser API
-  //     setArr(arr)
-  //   },[button])
-  // const handleClick = () => {
-  //   setOpen(true);
-  // };
-
+  const classes = useStyles()
+  const [arr, setArr] = useState([])
+  const [button, setButton] = useState(false)
+  const [id, setId] = useContext(UserIdcontext)
+  const [idnote, setIdNote] = useState(0)
+  const [open, setOpen] = useState(false)
+  const [change, setChange] = useState(false)
+  const [popup, setPopup] = useState({ message: '', severity: '' })
+  useEffect(() => {
+    // console.log('hola', id)
+    axios
+      .post(
+        'http://localhost:8000/users/getmynotes',
+        {},
+        { headers: { auth: id } }
+      )
+      .then((res) => {
+        console.log(res.data.data)
+        if (res.data.data) setArr(res.data.data)
+      })
+      .catch((err) => console.log(err))
+  }, [change, id])
   const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
+    if (reason === 'clickaway') {
+      return
     }
-
-    setOpen(false);
-  };
+    setOpen(false)
+  }
   return (
     <div className={classes.root}>
       <h1>My Notes</h1>
@@ -66,25 +68,26 @@ export default function Notes() {
         setArr={setArr}
         setButton={setButton}
         button={button}
-        id={id}
-        setId={setId}
+        id={idnote}
+        setId={setIdNote}
         setOpen={setOpen}
+        setPopup={setPopup}
+        setChange={setChange}
+        change={change}
       />
       <div className={classes.notes}>
-        {/* {arr.map((elem,index) => (
-          <NoteCard arr={arr} setArr={setArr} elem={elem} index={index} />
-        ))} */}
         {arr.filter((e) => e.isPinned).length === 0 ? (
           <div className={classes.noteSection}>
             {arr
-              .sort((a, b) => b.curDate - a.curDate)
+              .sort((a, b) => b.lastEdited - a.lastEdited)
               .map((elem, index) => (
                 <NoteCard
-                  arr={arr}
-                  setArr={setArr}
+                  noteId={elem.id}
                   elem={elem}
-                  index={index}
                   setOpen={setOpen}
+                  setPopup={setPopup}
+                  setChange={setChange}
+                  change={change}
                 />
               ))}
           </div>
@@ -93,15 +96,16 @@ export default function Notes() {
             <h2 className={classes.noteSection}>Pinned</h2>
             <div className={classes.noteSection}>
               {arr
-                .sort((a, b) => b.curDate - a.curDate)
+                .sort((a, b) => b.lastEdited - a.lastEdited)
                 .map((elem, index) =>
                   elem.isPinned ? (
                     <NoteCard
-                      arr={arr}
-                      setArr={setArr}
+                      noteId={elem.id}
                       elem={elem}
-                      index={index}
                       setOpen={setOpen}
+                      setPopup={setPopup}
+                      setChange={setChange}
+                      change={change}
                     />
                   ) : (
                     <></>
@@ -115,15 +119,16 @@ export default function Notes() {
             )}
             <div className={classes.noteSection}>
               {arr
-                .sort((a, b) => b.curDate - a.curDate)
+                .sort((a, b) => b.lastEdited - a.lastEdited)
                 .map((elem, index) =>
                   !elem.isPinned ? (
                     <NoteCard
-                      arr={arr}
-                      setArr={setArr}
+                      noteId={elem.id}
                       elem={elem}
-                      index={index}
+                      setPopup={setPopup}
                       setOpen={setOpen}
+                      setChange={setChange}
+                      change={change}
                     />
                   ) : (
                     <></>
@@ -134,21 +139,11 @@ export default function Notes() {
         )}
       </div>
       <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-        <Alert
-          onClose={handleClose}
-          severity={open === 1 || open === 4 ? "success" : "error"}
-        >
-          {open === 1 ? (
-            <>Note added successfully</>
-          ) : open === 2 ? (
-            <>Cannot add an empty note</>
-          ) : open === 3 ? (
-            <>Cannot have an empty note</>
-          ) : (
-            <>Note updated successfully</>
-          )}
+        <Alert onClose={handleClose} severity={popup.severity}>
+          {popup.message}
         </Alert>
       </Snackbar>
+
       {/* <Snackbar open={open4} autoHideDuration={2000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Note updated successfully
@@ -165,5 +160,5 @@ export default function Notes() {
         </Alert>
       </Snackbar> */}
     </div>
-  );
+  )
 }
