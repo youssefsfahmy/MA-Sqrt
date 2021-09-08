@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NoteCard(props) {
   const classes = useStyles();
-
+  console.log("MAYAAA", props);
   //////////// STATES /////////////////
   const [open, setOpen] = React.useState(false);
   const [noteValues, setNoteValues] = React.useState({

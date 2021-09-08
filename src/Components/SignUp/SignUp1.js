@@ -40,7 +40,7 @@ export default function SignUp1(props) {
       props.setButton(1);
       console.log("button");
     } else {
-      setPopsup({ message: res.data.error, severity: "error" });
+      setPopup({ message: res.data.error, severity: "error" });
       setOpen(true);
     }
   }
