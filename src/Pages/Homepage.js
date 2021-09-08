@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
-import NavBar from "../Components/HomePage/NavBar";
-import homebgd from "../Homepagebgd.png";
+import React, { useEffect } from 'react'
+import NavBar from '../Components/HomePage/NavBar'
+import homebgd from '../Homepagebgd.png'
 // import { height } from "@material-ui/system";
-import { useContext } from "react";
-import UserNamecontext from "../Components/UserNamecontext";
-import NoteCard from "../Components/Notes/NoteCard";
-import axios from "axios";
+import { useContext } from 'react'
+import UserNamecontext from '../Components/UserNamecontext'
+import NoteCard from '../Components/Notes/NoteCard'
+import axios from 'axios'
+import { BottomNavigation } from '@material-ui/core'
+import { useHistory } from 'react-router'
 
 export default function Homepage() {
   const [user, setUser] = React.useState("");
@@ -63,15 +65,15 @@ export default function Homepage() {
       .post(
         "http://localhost:8000/users/userdetails",
         {},
-        { headers: { auth: window.localStorage.getItem("auth") } }
+        { headers: { auth: window.localStorage.getItem('auth') } }
       )
       .then((res) => {
-        console.log(res.data.user.name);
-        setUser(res.data.user.name);
+        console.log(res.data.user.name)
+        setUser(res.data.user.name)
         // if (res.data.data) setArr(res.data.data)
       })
-      .catch((err) => console.log(err));
-  }, []);
+      .catch((err) => console.log(err))
+  }, [])
 
   return (
     <div style={{ backgroundImage: homebgd }}>
@@ -142,6 +144,9 @@ export default function Homepage() {
           <h1>Latest Todos</h1>
         </div>
       </div>
+      <BottomNavigation style={{ backgroundColor: 'black', height: '6vw' }}>
+        <h1 style={{ color: 'white' }}>Copyrights to MA^2 team</h1>
+      </BottomNavigation>
     </div>
-  );
+  )
 }
