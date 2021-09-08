@@ -66,9 +66,19 @@ export default function NavBar() {
   };
 
   const handleClose = () => {
+<<<<<<< HEAD
     window.localStorage.removeItem("auth");
     setAnchorEl(null);
   };
+=======
+    // window.localStorage.removeItem('auth')
+    setAnchorEl(null)
+  }
+  const handleClose2 = () => {
+    window.localStorage.removeItem('auth')
+    setAnchorEl(null)
+  }
+>>>>>>> 10f21129a46c0892fc967be700bfc8bd1cd073b2
 
   return (
     <div className={classes.root}>
@@ -145,11 +155,17 @@ export default function NavBar() {
                 open={open}
                 onClose={handleClose}
               >
+<<<<<<< HEAD
                 <Link to="/">
                   {" "}
                   <MenuItem onClick={handleClose}>Sign out</MenuItem>{" "}
+=======
+                <Link to='/'>
+                  {' '}
+                  <MenuItem onClick={handleClose2}>Sign out</MenuItem>{' '}
+>>>>>>> 10f21129a46c0892fc967be700bfc8bd1cd073b2
                 </Link>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem>My account</MenuItem>
               </Menu>
             </div>
             <IconButton

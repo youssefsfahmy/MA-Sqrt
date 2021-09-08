@@ -14,15 +14,15 @@ function Alert(props) {
 
 export default function TodoList(props) {
   const [add, setAdd] = React.useState(false)
+  const [change2, setChange2] = React.useState(false)
+
   // const [title, setTitle] = useContext(Titlecontext);
   const [title, setTitle] = React.useState({
     title2: '',
     editMode: false,
   })
   // const [listTitle, setListTitle] = React.useState('')
-  const [id, setId] = useContext(UserIdcontext)
-  const [open, setOpen] = React.useState(false) //snackbar
-  const [popup, setPopup] = React.useState({ message: '', severity: '' })
+  // const [id, setId] = useContext(UserIdcontext)
 
   // console.log(props);
 
@@ -30,18 +30,32 @@ export default function TodoList(props) {
     setTitle({ ...title, editMode: true })
   }
   const handleClick2 = () => {
-    setTitle({ ...title, editMode: false })
+    // setTitle({ ...title, editMode: false })
+    axios
+      .post(
+        'http://localhost:8000/todolist/updatelistTitle',
+        { Todolist: { id: props.curId, title: title.title2 } },
+        { headers: { auth: window.localStorage.getItem('auth') } }
+      )
+      .then((res) => {
+        if (res.data.statusCode === 0) {
+          props.setListTitle(title.title2)
+          setTitle({ ...title, editMode: false })
+          props.setChange(!props.change)
+          // setArray(res.data.todos.todos)
+          props.setPopup({ message: res.data.message, severity: 'success' })
+        } else {
+          //add error
+          props.setPopup({ message: res.data.error, severity: 'error' })
+        }
+        props.setOpen(true)
+        console.log('hiiiii', res.data)
+        // console.log('sdbskvbrwdhcxb')
+      })
+      .catch((err) => console.log(err))
   }
   const titleTextHandle = (e) => {
     setTitle({ ...title, title2: e.target.value })
-  }
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return
-    }
-
-    setOpen(false)
   }
 
   const [array, setArray] = React.useState([])
@@ -58,8 +72,14 @@ export default function TodoList(props) {
       .then((res) => {
         if (res.data.statusCode === 0) {
           props.setListTitle(res.data.todos.title)
+          setTitle({ ...title, title2: res.data.todos.title })
           setArray(res.data.todos.todos)
+          // props.setPopup({ message: res.data.message, severity: 'success' })
+        } else {
+          props.setPopup({ message: res.data.error, severity: 'error' })
+          props.setOpen(true)
         }
+        // props.setOpen(true)
         console.log('hiiiii', res.data)
         // console.log('sdbskvbrwdhcxb')
       })
@@ -71,7 +91,7 @@ export default function TodoList(props) {
     //   { ...props.all[props.cur], todos: [...array] },
     //   ...props.all.slice(props.cur + 1),
     // ])
-  }, [props.curId])
+  }, [props.curId, change2])
   // React.useEffect(() => {
   //   if (props.cur === -1) return
   //   setArray(props.all[props.cur].todos)
@@ -79,23 +99,30 @@ export default function TodoList(props) {
 
   return (
     <div
-    // style={{
-    //   position: "relative",
-    //   left: "20vw",
-    //   top: "7vw",
-    // }}
+      // style={{
+      //   position: "relative",
+      //   left: "20vw",
+      //   top: "7vw",
+      // }}
+      style={{ placeContent: 'center' }}
     >
       {props.curId !== '' ? (
         <>
           <div>
             {
               title.editMode ? (
-                <>
-                  <textarea onChange={titleTextHandle} value={title.title2} />
-                  <div>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                  }}
+                >
+                  <input onChange={titleTextHandle} value={title.title2} />
+                  <div style={{ marginLeft: '1vw' }}>
                     <DoneIcon onClick={handleClick2} />
                   </div>
-                </>
+                </div>
               ) : (
                 <h1 onClick={editTitleHandle}>{props.listTitle}</h1>
               )
@@ -110,6 +137,10 @@ export default function TodoList(props) {
                 arrayy={array}
                 curId={props.curId}
                 setCurId={props.setCurId}
+                change2={change2}
+                setChange2={setChange2}
+                setOpen={props.setOpen}
+                setPopup={props.setPopup}
               />
             </div>
             <div>
@@ -120,6 +151,10 @@ export default function TodoList(props) {
                 setArrayy={setArray}
                 curId={props.curId}
                 setCurId={props.setCurId}
+                change2={change2}
+                setChange2={setChange2}
+                setOpen={props.setOpen}
+                setPopup={props.setPopup}
               />
             </div>
           </div>
@@ -127,11 +162,6 @@ export default function TodoList(props) {
       ) : (
         <h1>choose a list</h1>
       )}
-      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity={popup.severity}>
-          {popup.message}
-        </Alert>
-      </Snackbar>
     </div>
   )
 }

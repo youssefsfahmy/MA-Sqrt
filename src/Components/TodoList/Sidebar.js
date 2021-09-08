@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 })
 
 export default function Sidebar(props) {
-  const [title, setTitle] = useContext(Titlecontext)
+  const [title, setTitle] = useState('')
   const classes = useStyles()
   const [key, setKey] = useState(0)
   //  const [curr, setCurr] = React.useState(0);
@@ -44,6 +44,10 @@ export default function Sidebar(props) {
     bottom: false,
     right: false,
   })
+  React.useEffect(() => {
+    setTitle('')
+  }, [state])
+
   /// const [lists, setLists] = React.useState([]);
   const onClick = () => {
     axios
@@ -51,13 +55,21 @@ export default function Sidebar(props) {
         'http://localhost:8000/todolist/addnewlist',
         {
           Todolist: {
-            title: 'Untitled',
+            title,
           },
         },
         { headers: { auth: window.localStorage.getItem('auth') } }
       )
       .then((res) => {
-        if (res.data.statusCode === 0) props.setChange(!props.change)
+        if (res.data.statusCode === 0) {
+          props.setCurId(res.data.newList._id)
+          props.setChange(!props.change)
+          props.setPopup({ message: res.data.message, severity: 'success' })
+          props.setTitle('')
+        } else {
+          props.setPopup({ message: res.data.error, severity: 'error' })
+        }
+        props.setOpen(true)
       })
       .catch((err) => console.log(err))
   }
@@ -73,7 +85,14 @@ export default function Sidebar(props) {
       )
       .then((res) => {
         console.log(res)
-        if (res.data.statusCode === 0) props.setChange(!props.change)
+        if (res.data.statusCode === 0) {
+          props.setChange(!props.change)
+          props.setCurId('')
+          props.setPopup({ message: res.data.message, severity: 'success' })
+        } else {
+          props.setPopup({ message: res.data.error, severity: 'error' })
+        }
+        props.setOpen(true)
       })
       .catch((err) => console.log(err))
 
@@ -104,15 +123,17 @@ export default function Sidebar(props) {
 
     setState({ ...state, [anchor]: open })
   }
-
+  const handleK = (e) => {
+    setTitle(e.target.value)
+  }
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
       })}
       role='presentation'
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}
+      // onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
         {props.all.map((elem, index) => (
@@ -130,23 +151,12 @@ export default function Sidebar(props) {
         ))}
       </List>
       <Divider />
-      <ListItem button key={'Add'} onClick={onClick}>
-        <ListItemIcon>
+      <ListItem>
+        <ListItemIcon key={'Add'} onClick={onClick}>
           <AddBoxIcon />
         </ListItemIcon>
-        <ListItemText primary={'New List'} />
+        <input onChange={handleK} />
       </ListItem>
-      {/* <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List> */}
     </div>
   )
 
