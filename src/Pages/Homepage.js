@@ -10,6 +10,7 @@ import axios from "axios";
 export default function Homepage() {
   const [user, setUser] = React.useState("");
   const [notearr, setNotearr] = React.useState([]);
+  const [listarr, setListarr] = React.useState([]);
   const [notes, setNotes] = React.useState([]);
 
   useEffect(() => {
@@ -44,15 +45,15 @@ export default function Homepage() {
       )
       .then((res) => {
         console.log(res.data);
-        const arrayn = res.data.data;
-        arrayn.sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited));
+        const arrayl = res.data.data;
+        // arrayn.sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited));
         // arrayn.splice(0, 2);
         const arr = [];
-        for (let i = 0; i < Math.min(2, arrayn.length); i++) {
-          arr.push(arrayn[i]);
+        for (let i = 0; i < Math.min(2, arrayl.length); i++) {
+          arr.push(arrayl[i]);
         }
-        console.log(arrayn, "notesss");
-        setNotearr([...arr]); //different array here
+        console.log(arrayl, "lists");
+        setListarr([...arr]); //different array here
       })
       .catch((err) => console.log(err));
   }, []);
