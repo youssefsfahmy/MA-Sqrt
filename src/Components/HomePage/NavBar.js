@@ -64,6 +64,7 @@ export default function NavBar() {
   }
 
   const handleClose = () => {
+    window.localStorage.removeItem('auth')
     setAnchorEl(null)
   }
 

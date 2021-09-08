@@ -35,12 +35,12 @@ export default function SignUp1(props) {
         name: name,
       },
     });
-    console.log(res);
+    console.log("abdul", res);
     if (res.data.statusCode === 0) {
       props.setButton(1);
       console.log("button");
     } else {
-      setPopup({ message: res.data.message, severity: "error" });
+      setPopsup({ message: res.data.error, severity: "error" });
       setOpen(true);
     }
   }

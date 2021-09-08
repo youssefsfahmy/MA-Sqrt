@@ -7,13 +7,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
-// import CommentIcon from '@material-ui/icons/Comment';
 import DeleteIcon from "@material-ui/icons/Delete";
-// import { Filter } from '@material-ui/icons';
-// import reactDom from 'react-dom';
 import DoneIcon from "@material-ui/icons/Done";
-// import Textbox1 from './Textbox1'
-// import EditText from "./EditText";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,13 +21,9 @@ const useStyles = makeStyles((theme) => ({
 function CheckboxList(props) {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
-  // const [edited,setEdited]
 
   const handleDelete = (id) => {
-    // console.log(id);
     props.setArrayy(props.arrayy.filter((elem) => elem.key !== id));
-    // console.log("ay haga");
-    // console.log(id);
   };
   const onChange1 = (e, id) => {
     const elem = props.arrayy[id];

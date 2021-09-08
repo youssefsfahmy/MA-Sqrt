@@ -1,7 +1,9 @@
-import React from 'react';
+import { React, useContext, useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import axios from "axios";
+
 // import { createContext } from 'react';
 
 
@@ -19,12 +21,26 @@ const useStyles = makeStyles((theme) => ({
 export default function BasicTextFields(props) {
   const classes = useStyles();
 
-  const [text , setText] = React.useState("")
+  const [text , setText] = useState("")
+
 
  
   const clickHandle=(e) =>
    {
-    props.setaddd(true)
+    console.log(props.all)
+    axios.post('http://localhost:8000/todo/addnewtask' , {
+      
+        Todo : {
+          content:text,
+          priority:"1",
+          listId: props.curId
+        }
+      
+        }
+      , { headers: { auth: window.localStorage.getItem('auth') } }).then((res)=> {
+        if(res.data.statusCode===0) props.setChange(!props.change)
+      }) .catch((err) => console.log(err))
+    // props.setaddd(true)
     
     const newTodo = {
       isComplete: false,
@@ -38,6 +54,7 @@ export default function BasicTextFields(props) {
     props.setArrayy([...props.arrayy,newTodo])
 
   }
+
 
   const handleInputChange=(e) =>{
     setText(e.target.value)
