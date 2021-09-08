@@ -10,9 +10,6 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DoneIcon from "@material-ui/icons/Done";
 import axios from "axios";
-import React from 'react'
-import { makeStyles } from '@material-ui/styles'
-import List from '@material-ui/core/List'
 import Todohaya from './Todohaya'
 
 const useStyles = makeStyles((theme) => ({
