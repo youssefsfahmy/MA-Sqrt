@@ -87,7 +87,7 @@ export default function Sidebar(props) {
         console.log(res)
         if (res.data.statusCode === 0) {
           props.setChange(!props.change)
-          props.setCurId('')
+          if (id2 === props.curId) props.setCurId('')
           props.setPopup({ message: res.data.message, severity: 'success' })
         } else {
           props.setPopup({ message: res.data.error, severity: 'error' })
