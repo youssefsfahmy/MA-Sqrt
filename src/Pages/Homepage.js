@@ -1,147 +1,166 @@
-import React, { useEffect } from "react";
-import NavBar from "../Components/HomePage/NavBar";
-import homebgd from "../Homepagebgd.png";
+import React, { useEffect } from 'react'
+import NavBar from '../Components/HomePage/NavBar'
+import homebgd from '../Homepagebgd.png'
 // import { height } from "@material-ui/system";
-import { useContext } from "react";
-import UserNamecontext from "../Components/UserNamecontext";
-import NoteCard from "../Components/Notes/NoteCard";
-import axios from "axios";
-import { BottomNavigation } from "@material-ui/core";
-import { useHistory } from "react-router";
-import ListCard from "../Components/TodoList/ListCard";
-
+import { useContext } from 'react'
+import UserNamecontext from '../Components/UserNamecontext'
+import NoteCard from '../Components/Notes/NoteCard'
+import axios from 'axios'
+import { BottomNavigation } from '@material-ui/core'
+import { useHistory } from 'react-router'
+import ListCard from '../Components/TodoList/ListCard'
+import Emoji from '../Emoji'
 export default function Homepage() {
-  const [user, setUser] = React.useState("");
-  const [notearr, setNotearr] = React.useState([]);
-  const [listarr, setListarr] = React.useState([]);
-  const [notes, setNotes] = React.useState([]);
+  const [user, setUser] = React.useState('')
+  const [notearr, setNotearr] = React.useState([])
+  const [listarr, setListarr] = React.useState([])
+  const [notes, setNotes] = React.useState([])
 
   useEffect(() => {
     // console.log('hola', id)
     axios
       .post(
-        "http://localhost:8000/users/getmynotes",
+        'http://localhost:8000/users/getmynotes',
         {},
 
-        { headers: { auth: window.localStorage.getItem("auth") } }
+        { headers: { auth: window.localStorage.getItem('auth') } }
       )
       .then((res) => {
-        console.log(res.data);
-        const arrayn = res.data.data;
-        arrayn.sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited));
+        console.log(res.data)
+        const arrayn = res.data.data
+        arrayn.sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited))
         // arrayn.splice(0, 2);
-        const arr = [];
+        const arr = []
         for (let i = 0; i < Math.min(2, arrayn.length); i++) {
-          arr.push(arrayn[i]);
+          arr.push(arrayn[i])
         }
-        console.log(arrayn, "notesss");
-        setNotearr([...arr]);
+        console.log(arrayn, 'notesss')
+        setNotearr([...arr])
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
     ///FILLL HEREEEE , ADDDDD GETTT MYYYYYY LISTSSSSSSSSSSSS
     axios
       .post(
-        "http://localhost:8000/users/getmylists",
+        'http://localhost:8000/users/getmylists',
         {},
 
-        { headers: { auth: window.localStorage.getItem("auth") } }
+        { headers: { auth: window.localStorage.getItem('auth') } }
       )
       .then((res) => {
-        console.log(res);
-        const arrayl = res.data.data;
+        console.log(res)
+        const arrayl = res.data.data
         // arrayl.sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited));
         // arrayn.splice(0, 2);
-        const arr = [];
+        const arr = []
         for (let i = 0; i < Math.min(2, arrayl.length); i++) {
-          arr.push(arrayl[i]);
+          arr.push(arrayl[i])
         }
         // console.log(arrayl, "lists");
-        setListarr([...arr]); //different array here
+        setListarr([...arr]) //different array here
       })
-      .catch((err) => console.log(err));
-  }, []);
+      .catch((err) => console.log(err))
+  }, [])
 
   useEffect(() => {
     axios
       .post(
-        "http://localhost:8000/users/userdetails",
+        'http://localhost:8000/users/userdetails',
         {},
-        { headers: { auth: window.localStorage.getItem("auth") } }
+        { headers: { auth: window.localStorage.getItem('auth') } }
       )
       .then((res) => {
-        console.log(res.data.user.name);
-        setUser(res.data.user.name);
+        console.log(res.data.user.name)
+        setUser(res.data.user.name)
         // if (res.data.data) setArr(res.data.data)
       })
-      .catch((err) => console.log(err));
-  }, []);
+      .catch((err) => console.log(err))
+  }, [])
 
   return (
     <div>
       <div>
-        <NavBar style={{ position: "static" }} />
+        <NavBar style={{ position: 'static' }} />
         <img
           src={homebgd}
-          style={{ width: "100%", height: "30vw" }}
-          alt={"welcome"}
+          style={{ width: '100%', height: '30vw' }}
+          alt={'welcome'}
         />
         <h1
           style={{
-            position: "absolute",
-            bottom: "230px",
-            left: "20vw",
-            fontSize: "5vw",
-            color: "white",
+            position: 'absolute',
+            bottom: '230px',
+            left: '20vw',
+            fontSize: '5vw',
+            color: 'white',
           }}
         >
           Welcome Back,{user}
         </h1>
       </div>
-      <div style={{ backgroundColor: "whitesmoke" }}>
+      <div style={{ backgroundColor: 'whitesmoke' }}>
         <div
           style={{
-            textAlign: "-webkit-center",
+            textAlign: '-webkit-center',
           }}
         >
           <h1>Latest Notes</h1>
           <div
             style={{
-              display: "flex",
-              justifyContent: "center",
+              display: 'flex',
+              justifyContent: 'center',
+              height: '50vh',
+              alignItems: 'center',
             }}
           >
             {console.log(notearr.length)}
-            {notearr.map((d) => (
-              <>
-                <NoteCard noteId={d._id} elem={d} />
-              </>
-            ))}
+            {notearr.length === 0 ? (
+              <h3>
+                You don't have any notes :( , add a new one from the notes tab
+              </h3>
+            ) : (
+              // <Emoji symbol={'0x1F60A'} />
+              // <i class='twa twa-railway-car'></i>
+              notearr.map((d) => (
+                <>
+                  <NoteCard noteId={d._id} elem={d} displayIcons={false} />
+                </>
+              ))
+            )}
           </div>
         </div>
         <div
           style={{
-            textAlign: "-webkit-center",
+            textAlign: '-webkit-center',
           }}
         >
-          {" "}
-          <h1>Latest Todos</h1>
+          {' '}
+          <h1>Latest Todo Lists</h1>
           <div
             style={{
-              display: "flex",
-              justifyContent: "center",
+              display: 'flex',
+              justifyContent: 'center',
+              height: '65vh',
+              alignItems: 'center',
             }}
           >
-            {listarr.map((d) => (
-              <>
-                <ListCard todos={d.todos} title={d.title} />
-              </>
-            ))}
+            {listarr.length === 0 ? (
+              <h3>
+                You don't have any todolists :( , add a new one from the To-Do
+                lists tab
+              </h3>
+            ) : (
+              listarr.map((d) => (
+                <>
+                  <ListCard todos={d.todos} title={d.title} />
+                </>
+              ))
+            )}
           </div>
         </div>
       </div>
-      <BottomNavigation style={{ backgroundColor: "gray", height: "7vw" }}>
-        <h1 style={{ color: "white" }}>Copyrights to MA^2 team</h1>
+      <BottomNavigation style={{ backgroundColor: 'gray', height: '7vw' }}>
+        <h1 style={{ color: 'white' }}>Copyrights to MA^2 team</h1>
       </BottomNavigation>
     </div>
-  );
+  )
 }

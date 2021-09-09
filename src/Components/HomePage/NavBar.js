@@ -48,12 +48,14 @@ const useStyles = makeStyles((theme) => ({
     border: 'none',
     color: 'white',
     fontSize: '18px',
+    cursor: 'pointer',
   },
   todo: {
     backgroundColor: 'gray',
     border: 'none',
     color: 'white',
     fontSize: '18px',
+    cursor: 'pointer',
   },
 }))
 
@@ -112,7 +114,7 @@ export default function NavBar() {
             </Link>
             <Link to='/Todo'>
               <button id='todo' className={classes.todo}>
-                To-Do List
+                To-Do Lists
               </button>
             </Link>
           </div>

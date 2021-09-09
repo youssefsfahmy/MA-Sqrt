@@ -15,6 +15,7 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import axios from 'axios'
+import { useHistory } from 'react-router'
 // import UserIdcontext from '../LogIn/UserIdcontext'
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,6 +70,7 @@ export default function NoteCard(props) {
   console.log('MAYAAA', props)
   //////////// STATES /////////////////
   const [open, setOpen] = React.useState(false)
+  const history = useHistory()
   const [noteValues, setNoteValues] = React.useState({
     id: props.noteId,
     title: props.elem.title,
@@ -86,7 +88,11 @@ export default function NoteCard(props) {
   }, [props.elem, props.noteId])
   ///////////////// callbacks//////////////
   const handleChange = (event, field) => {
-    setNoteValues({ ...noteValues, [field]: event.target.value })
+    let val = event.target.value
+    if (field === 'title') {
+      val = val.substring(0, 20)
+    }
+    setNoteValues({ ...noteValues, [field]: val })
   }
   const onDelete = (event) => {
     axios
@@ -109,6 +115,10 @@ export default function NoteCard(props) {
     props.setOpen(true)
   }
   const handleClickOpen = () => {
+    if (!props.displayIcons) {
+      history.push('/Notes')
+      return
+    }
     setOpen(true)
   }
   const handlePin = () => {
@@ -122,6 +132,7 @@ export default function NoteCard(props) {
       )
       .then((res) => {
         if (res.data.statusCode === 0) {
+          console.log(res.data)
           props.setChange(!props.change)
         } else {
         }
@@ -151,7 +162,12 @@ export default function NoteCard(props) {
       ti(currentdate.getSeconds())
     return dt
   }
+
   const handleClose = () => {
+    if (!props.displayIcons) {
+      history.push('/Notes')
+      return
+    }
     axios
       .post('http://localhost:8000/notes/updatenote', noteValues, {
         headers: { auth: window.localStorage.getItem('auth') },
@@ -171,32 +187,49 @@ export default function NoteCard(props) {
       })
       .catch((err) => console.log(err))
   }
+  const cardClick = () => {
+    if (!props.displayIcons) {
+      history.push('/Notes')
+    }
+  }
   /////// desgin ///////////
   return (
     <div>
-      <Card className={classes.root}>
+      <Card className={classes.root} onClick={cardClick}>
         <CardHeader
           action={
-            <IconButton aria-label='settings' onClick={handlePin}>
-              {props.elem.isPinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
-            </IconButton>
+            props.displayIcons ? (
+              <IconButton aria-label='settings' onClick={handlePin}>
+                {props.elem.isPinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
+              </IconButton>
+            ) : (
+              <></>
+            )
           }
           title={props.elem.title}
           subheader={format(new Date(props.elem.lastEdited))}
+          // onClick={handleClickOpen}
+          style={{ wordBreak: 'break-all' }}
         />
         <CardContent onClick={handleClickOpen} className={classes.noteContent}>
           <p className={classes.pp}>{props.elem.content}</p>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label='alarm'>
-            <RiAlarmFill />
-          </IconButton>
-          <IconButton aria-label='share'>
-            <ShareIcon />
-          </IconButton>
-          <IconButton aria-label='delete' onClick={onDelete}>
-            <AiFillDelete />
-          </IconButton>
+          {props.displayIcons ? (
+            <>
+              <IconButton aria-label='alarm'>
+                <RiAlarmFill />
+              </IconButton>
+              <IconButton aria-label='share'>
+                <ShareIcon />
+              </IconButton>
+              <IconButton aria-label='delete' onClick={onDelete}>
+                <AiFillDelete />
+              </IconButton>
+            </>
+          ) : (
+            <></>
+          )}
         </CardActions>
       </Card>
       <Dialog

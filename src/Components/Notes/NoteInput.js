@@ -42,7 +42,11 @@ export default function NoteInput(props) {
   // const [note,setNote]=React.useState({title:"",content:""})
   const [expand, setExpand] = React.useState(false)
   const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value })
+    let val = event.target.value
+    if (prop === 'title') {
+      val = val.substring(0, 20)
+    }
+    setValues({ ...values, [prop]: val })
   }
   const handleExpand = () => {
     setExpand(true)

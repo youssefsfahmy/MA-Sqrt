@@ -74,6 +74,7 @@ export default function TodoList(props) {
           props.setListTitle(res.data.todos.title)
           setTitle({ ...title, title2: res.data.todos.title })
           setArray(res.data.todos.todos)
+          console.log('hola', res.data.todos.todos)
           // props.setPopup({ message: res.data.message, severity: 'success' })
         } else {
           props.setPopup({ message: res.data.error, severity: 'error' })
@@ -104,7 +105,7 @@ export default function TodoList(props) {
       //   left: "20vw",
       //   top: "7vw",
       // }}
-      style={{ placeContent: 'center' ,backgroundColor:'whitesmoke'}}
+      style={{ placeContent: 'center', backgroundColor: 'whitesmoke' }}
     >
       {props.curId !== '' ? (
         <>
@@ -120,7 +121,10 @@ export default function TodoList(props) {
                 >
                   <input onChange={titleTextHandle} value={title.title2} />
                   <div style={{ marginLeft: '1vw' }}>
-                    <DoneIcon onClick={handleClick2} />
+                    <DoneIcon
+                      onClick={handleClick2}
+                      style={{ cursor: 'pointer' }}
+                    />
                   </div>
                 </div>
               ) : (
