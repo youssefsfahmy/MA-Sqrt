@@ -20,12 +20,7 @@ export default function ListCard(props) {
         <div>
           {props.todos.map((d) => (
             <>
-              <ListItemText className="listText" primary={d.content} />
-              <TextField
-                id="standard-basic"
-                label={d.content}
-                value={d.content}
-              />
+              <li>{d.content}</li>
             </>
           ))}
         </div>

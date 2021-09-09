@@ -104,7 +104,7 @@ export default function TodoList(props) {
       //   left: "20vw",
       //   top: "7vw",
       // }}
-      style={{ placeContent: 'center' }}
+      style={{ placeContent: 'center' ,backgroundColor:'whitesmoke'}}
     >
       {props.curId !== '' ? (
         <>

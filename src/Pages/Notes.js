@@ -8,8 +8,8 @@ import { useHistory } from 'react-router'
 const useStyles = makeStyles((theme) => ({
   footer: {
     position: 'fixed',
-    height: '5vw',
-    backgroundColor: 'black',
+    height: '6vw',
+    backgroundColor: 'gray',
     bottom: '0px',
     left: '0px',
     right: '0px',
