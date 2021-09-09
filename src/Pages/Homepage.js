@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
-import NavBar from '../Components/HomePage/NavBar'
-import homebgd from '../Homepagebgd.png'
+import React, { useEffect } from "react";
+import NavBar from "../Components/HomePage/NavBar";
+import homebgd from "../Homepagebgd.png";
 // import { height } from "@material-ui/system";
-import { useContext } from 'react'
-import UserNamecontext from '../Components/UserNamecontext'
-import NoteCard from '../Components/Notes/NoteCard'
-import axios from 'axios'
-import { BottomNavigation } from '@material-ui/core'
-import { useHistory } from 'react-router'
+import { useContext } from "react";
+import UserNamecontext from "../Components/UserNamecontext";
+import NoteCard from "../Components/Notes/NoteCard";
+import axios from "axios";
+import { BottomNavigation } from "@material-ui/core";
+import { useHistory } from "react-router";
 
 export default function Homepage() {
   const [user, setUser] = React.useState("");
@@ -65,20 +65,20 @@ export default function Homepage() {
       .post(
         "http://localhost:8000/users/userdetails",
         {},
-        { headers: { auth: window.localStorage.getItem('auth') } }
+        { headers: { auth: window.localStorage.getItem("auth") } }
       )
       .then((res) => {
-        console.log(res.data.user.name)
-        setUser(res.data.user.name)
+        console.log(res.data.user.name);
+        setUser(res.data.user.name);
         // if (res.data.data) setArr(res.data.data)
       })
-      .catch((err) => console.log(err))
-  }, [])
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div style={{ backgroundImage: homebgd }}>
       <div>
-        <NavBar />
+        <NavBar style={{ position: "static" }} />
         <img
           src={homebgd}
           style={{ width: "100%", height: "30vw" }}
@@ -100,35 +100,19 @@ export default function Homepage() {
         <div
           style={{
             textAlign: "-webkit-center",
-            // position: " relative",
-            // left: "5vw",
           }}
         >
           <h1>Latest Notes</h1>
-          {/* id:"",
-        title:"",
-        content:"",
-        date:"",
-        curDate:"" */}
           <div
             style={{
               display: "flex",
               justifyContent: "center",
-              // height: "60vw",
             }}
           >
             {console.log(notearr.length)}
             {notearr.map((d) => (
               <>
-                <NoteCard
-                  // elem={{
-                  noteId={d._id}
-                  elem={d}
-                  // content: d.content,
-                  // date: d.lastEdited,
-                  // curDate: "",
-                  // }}
-                />
+                <NoteCard noteId={d._id} elem={d} />
               </>
             ))}
           </div>
@@ -136,17 +120,21 @@ export default function Homepage() {
         <div
           style={{
             textAlign: "-webkit-center",
-            // position: "relative",
-            // left: "50vw",
           }}
         >
           {" "}
           <h1>Latest Todos</h1>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          ></div>
         </div>
       </div>
-      <BottomNavigation style={{ backgroundColor: 'black', height: '6vw' }}>
-        <h1 style={{ color: 'white' }}>Copyrights to MA^2 team</h1>
+      <BottomNavigation style={{ backgroundColor: "gray", height: "7vw" }}>
+        <h1 style={{ color: "white" }}>Copyrights to MA^2 team</h1>
       </BottomNavigation>
     </div>
-  )
+  );
 }
