@@ -8,6 +8,7 @@ import NoteCard from "../Components/Notes/NoteCard";
 import axios from "axios";
 import { BottomNavigation } from "@material-ui/core";
 import { useHistory } from "react-router";
+import ListCard from "../Components/TodoList/ListCard";
 
 export default function Homepage() {
   const [user, setUser] = React.useState("");
@@ -76,7 +77,7 @@ export default function Homepage() {
   }, []);
 
   return (
-    <div style={{ backgroundImage: homebgd }}>
+    <div>
       <div>
         <NavBar style={{ position: "static" }} />
         <img
@@ -96,7 +97,7 @@ export default function Homepage() {
           Welcome Back,{user}
         </h1>
       </div>
-      <div>
+      <div style={{ backgroundColor: "whitesmoke" }}>
         <div
           style={{
             textAlign: "-webkit-center",
@@ -128,8 +129,15 @@ export default function Homepage() {
             style={{
               display: "flex",
               justifyContent: "center",
+             
             }}
-          ></div>
+          >
+            {listarr.map((d) => (
+              <>
+                <ListCard todos={d.todos} title={d.title}  />
+              </>
+            ))}
+          </div>
         </div>
       </div>
       <BottomNavigation style={{ backgroundColor: "gray", height: "7vw" }}>
