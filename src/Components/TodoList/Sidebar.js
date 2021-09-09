@@ -8,8 +8,6 @@ import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
-import MailIcon from '@material-ui/icons/Mail'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 // import { Height } from "@material-ui/icons";
@@ -96,21 +94,12 @@ export default function Sidebar(props) {
       })
       .catch((err) => console.log(err))
 
-    // props.setAll([...props.all.filter((elem) => elem.key !== id)]);
-    // console.log(index ,"  ", props.cur)
-    // // if(index !== props.cur)
-    //    props.setCur(props.cur - 1)
-    // console.log()
-    // props.setChange(!props.change)
-  }
 
+  }
+  
   const onClick2 = (e, id) => {
-    // console.log('hi', id)
-    // console.log(props.all)
-    // props.setCur(id);
     props.setCurId(id)
     props.setChange(!props.change)
-    // setTitle(lists[props.cur].title);
   }
   const toggleDrawer = (anchor, open) => (event) => {
     if (

@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import Sidebar from "../Components/TodoList/Sidebar";
+import Newsidebar from "../Components/TodoList/Newsidebar";
 import TodoList from "../Components/TodoList/TodoList";
 import NavBar from "../Components/HomePage/NavBar";
 import axios from "axios";
@@ -82,7 +83,8 @@ export default function Todo() {
           display: "flex",
         }}
       >
-        <Sidebar
+        <Newsidebar
+          style={{ positon: "relative!important" }}
           all={all}
           setAll={setAll}
           change={change}
@@ -95,8 +97,8 @@ export default function Todo() {
           setOpen={setOpen}
           setPopup={setPopup}
         />
-        <TodoList 
-        style={{backgroundColor:"whitesmoke"}}
+        <TodoList
+          style={{ backgroundColor: "whitesmoke" }}
           all={all}
           setAll={setAll}
           cur={cur}
@@ -116,9 +118,9 @@ export default function Todo() {
           {popup.message}
         </Alert>
       </Snackbar>
-      <BottomNavigation className={classes.footer}>
+      {/* <BottomNavigation className={classes.footer}>
         <h2 style={{ color: "white" }}>Copyrights to MA^2 team</h2>
-      </BottomNavigation>
+      </BottomNavigation> */}
     </div>
   );
 }
