@@ -47,15 +47,15 @@ export default function Homepage() {
         { headers: { auth: window.localStorage.getItem("auth") } }
       )
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         const arrayl = res.data.data;
-        // arrayn.sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited));
+        // arrayl.sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited));
         // arrayn.splice(0, 2);
         const arr = [];
         for (let i = 0; i < Math.min(2, arrayl.length); i++) {
           arr.push(arrayl[i]);
         }
-        console.log(arrayl, "lists");
+        // console.log(arrayl, "lists");
         setListarr([...arr]); //different array here
       })
       .catch((err) => console.log(err));
@@ -129,12 +129,11 @@ export default function Homepage() {
             style={{
               display: "flex",
               justifyContent: "center",
-             
             }}
           >
             {listarr.map((d) => (
               <>
-                <ListCard todos={d.todos} title={d.title}  />
+                <ListCard todos={d.todos} title={d.title} />
               </>
             ))}
           </div>

@@ -15,6 +15,7 @@ import Todohaya from './Todohaya'
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    backgroundColor:'whitesmoke'
     // maxWidth: 360,
     ///   backgroundColor: theme.palette.background.paper,
   },
@@ -103,7 +104,7 @@ function CheckboxList(props) {
 
   return (
     <>
-      <div />
+      <div style={{backgroundColor:"whitesmoke"}} />
       <List className={classes.root}>
         {props.arrayy.map((elem, index) => (
           // <ListItem
