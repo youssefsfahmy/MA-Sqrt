@@ -152,6 +152,7 @@ export default function SignIn() {
               fontWeight: '700',
               fontSize: '1vw',
               fontFamily: 'sans-serif',
+              cursor: 'pointer',
             }}
             onClick={handlelogin}
           >
@@ -173,6 +174,7 @@ export default function SignIn() {
               fontWeight: '700',
               fontSize: '1vw',
               fontFamily: 'sans-serif',
+              cursor: 'pointer',
             }}
           >
             SIGN UP
