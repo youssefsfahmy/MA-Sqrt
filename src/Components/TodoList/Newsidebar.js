@@ -16,14 +16,14 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import axios from "axios";
 import AddBoxIcon from "@material-ui/icons/AddBox";
+import "../../newsidebar.css";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    paddingTop:"4vw"
-
+    paddingTop: "1vw",
   },
   drawer: {
     width: drawerWidth,
@@ -31,34 +31,26 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    positon: "relative" ,   
-
-
+    position: "relative",
   },
   // necessary for content to be below app bar
   toolbar: {
     fontSize: "2vw",
     textAlignLast: "center",
-   // marginTop: "2vw",
+    // marginTop: "2vw",
     fontFamily: "fantasy",
     color: "slategrey",
   },
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
+    //backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
-    positon:"relative",
-
   },
   list: {
     width: 250,
-    positon:"relative",
-
   },
   fullList: {
     width: "auto",
-    positon:"relative",
-
   },
   button: {
     fontSize: "2vw",
@@ -137,9 +129,8 @@ export default function Newsidebar(props) {
     props.setChange(!props.change);
   };
   const list = () => (
-    <div style={{    positon:"relative",
-}}>
-      <List >
+    <div style={{ position: "relative" }}>
+      <List>
         {props.all.map((elem, index) => (
           <>
             <ListItem button key={elem.title}>
@@ -166,8 +157,6 @@ export default function Newsidebar(props) {
 
   return (
     <div className={classes.root}>
-      <CssBaseline style={{    positon:"relative",
-}}/>
       {/* <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" noWrap>

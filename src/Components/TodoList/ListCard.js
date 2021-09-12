@@ -20,7 +20,9 @@ export default function ListCard(props) {
         onClick={() => history.push('/Todo')}
       >
         <CardHeader title={props.title} />
-        <div>
+        <div style={{    textAlign: "left",
+    paddingLeft: "3vw",
+    fontSize: "1.5vw",}}>
           {props.todos.map((d) => (
             <>
               <li>{d.content}</li>

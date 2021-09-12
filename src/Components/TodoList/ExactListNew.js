@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -10,24 +10,25 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DoneIcon from "@material-ui/icons/Done";
 import axios from "axios";
-import Todohaya from './Todohaya'
+import Todohaya from "./Todohaya";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
-    backgroundColor:'whitesmoke'
+    width: "100%",
+    
+    // backgroundColor:'whitesmoke'
     // maxWidth: 360,
     ///   backgroundColor: theme.palette.background.paper,
   },
-}))
+}));
 
 function CheckboxList(props) {
-  const classes = useStyles()
-  const [checked, setChecked] = React.useState([])
+  const classes = useStyles();
+  const [checked, setChecked] = React.useState([]);
   React.useEffect(() => {
-    console.log('idddd', props.curId)
+    console.log("idddd", props.curId);
     // if (props.curId === '') return
-    console.log('wlwlw', props.arrayy)
+    console.log("wlwlw", props.arrayy);
     // axios
     //   .post(
     //     'http://localhost:8000/todo/todos',
@@ -50,7 +51,7 @@ function CheckboxList(props) {
     //   { ...props.all[props.cur], todos: [...array] },
     //   ...props.all.slice(props.cur + 1),
     // ])
-  }, [props.curId])
+  }, [props.curId]);
   // const handleDelete = (id) => {
   //   props.setArrayy(props.arrayy.filter((elem) => elem.key !== id))
   // }
@@ -64,13 +65,13 @@ function CheckboxList(props) {
   // }
 
   const handleCheck = (id) => {
-    const myElement = props.arrayy[id]
+    const myElement = props.arrayy[id];
     props.setArrayy([
       ...props.arrayy.slice(0, id),
       { ...myElement, isComplete: !myElement.isComplete },
       ...props.arrayy.slice(id + 1),
-    ])
-  }
+    ]);
+  };
 
   // const handleEdit = (id) => {
   //   const elem = props.arrayy[id]
@@ -104,7 +105,7 @@ function CheckboxList(props) {
 
   return (
     <>
-      <div style={{backgroundColor:"whitesmoke"}} />
+      <div style={{ backgroundColor: "whitesmoke" }} />
       <List className={classes.root}>
         {props.arrayy.map((elem, index) => (
           // <ListItem
@@ -171,7 +172,7 @@ function CheckboxList(props) {
       </List>
       <div />
     </>
-  )
+  );
 }
 
-export default CheckboxList
+export default CheckboxList;
