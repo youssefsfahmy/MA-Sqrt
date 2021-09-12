@@ -48,12 +48,14 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
     color: "white",
     fontSize: "18px",
+    cursor: "pointer",
   },
   todo: {
     backgroundColor: "gray",
     border: "none",
     color: "white",
     fontSize: "18px",
+    cursor : "pointer",
   },
 }));
 

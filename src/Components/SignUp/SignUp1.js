@@ -35,7 +35,7 @@ export default function SignUp1(props) {
         name: name,
       },
     });
-    console.log("abdul", res);
+    // console.log("abdul", res);
     if (res.data.statusCode === 0) {
       props.setButton(1);
       console.log("button");
@@ -128,6 +128,7 @@ export default function SignUp1(props) {
             fontWeight: "700",
             fontSize: "1vw",
             fontFamily: "sans-serif",
+            cursor : "pointer",
           }}
         >
           NEXT
