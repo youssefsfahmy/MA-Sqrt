@@ -15,6 +15,8 @@ import Dropdown from './Dropdown'
 const useStyles = makeStyles((theme) => ({
   item: {
     width: '30vw',
+    // display:"flex",
+    // justifyContent:"spaceBetween"
   },
 }))
 export default function Todohaya(props) {
