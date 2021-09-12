@@ -12,66 +12,66 @@ import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    position: "fixed",
-    height: "6vw",
-    backgroundColor: "gray",
-    bottom: "0px",
-    left: "0px",
-    right: "0px",
-    marginBottom: "0px",
+    position: 'fixed',
+    height: '6vw',
+    backgroundColor: 'gray',
+    bottom: '0px',
+    left: '0px',
+    right: '0px',
+    marginBottom: '0px',
   },
-}));
+}))
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} variant='filled' {...props} />
 }
 export default function Todo() {
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const [all, setAll] = useState([]);
-  const [cur, setCur] = useState(-1);
-  const [curId, setCurId] = useState("");
-  const [listTitle, setListTitle] = useState("");
-  const [change, setChange] = useState(false);
-  const [open, setOpen] = React.useState(false); //snackbar
-  const [popup, setPopup] = React.useState({ message: "", severity: "" });
-  const history = useHistory();
+  const [all, setAll] = useState([])
+  const [cur, setCur] = useState(-1)
+  const [curId, setCurId] = useState('')
+  const [listTitle, setListTitle] = useState('')
+  const [change, setChange] = useState(false)
+  const [open, setOpen] = React.useState(false) //snackbar
+  const [popup, setPopup] = React.useState({ message: '', severity: '' })
+  const history = useHistory()
 
   useEffect(() => {
-    console.log(window.localStorage, "dsfsdfsf");
-    if (window.localStorage.getItem("auth") == null) {
-      console.log("its null");
-      history.push("/");
+    console.log(window.localStorage, 'dsfsdfsf')
+    if (window.localStorage.getItem('auth') == null) {
+      console.log('its null')
+      history.push('/')
     }
-  }, []);
+  }, [])
   // console.log(all[cur]);
 
   const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
+    if (reason === 'clickaway') {
+      return
     }
 
-    setOpen(false);
-  };
+    setOpen(false)
+  }
   useEffect(() => {
     // console.log('effect')
     axios
       .post(
-        "http://localhost:8000/users/getmylists",
+        'http://localhost:8000/users/getmylists',
         {},
-        { headers: { auth: window.localStorage.getItem("auth") } }
+        { headers: { auth: window.localStorage.getItem('auth') } }
       )
       .then((res) => {
         if (res.data.statusCode === 0) {
           // console.log(res.data.data)
-          setAll(res.data.data);
+          setAll(res.data.data)
           // setPopup({ message: res.data.message, severiy: 'success' })
         } else {
-          setPopup({ message: res.data.error, severiy: "error" });
-          setOpen(true);
+          setPopup({ message: res.data.error, severiy: 'error' })
+          setOpen(true)
         }
       })
-      .catch((err) => console.log(err));
-  }, [change]);
+      .catch((err) => console.log(err))
+  }, [change])
   // console.log(all)
   return (
     <div>
@@ -80,7 +80,7 @@ export default function Todo() {
       </div>
       <div
         style={{
-          display: "flex",
+          display: 'flex',
         }}
       >
         <Newsidebar
@@ -98,7 +98,7 @@ export default function Todo() {
           setPopup={setPopup}
         />
         <TodoList
-          style={{ backgroundColor: "whitesmoke" }}
+          style={{ backgroundColor: 'whitesmoke' }}
           all={all}
           setAll={setAll}
           cur={cur}
@@ -122,5 +122,5 @@ export default function Todo() {
         <h2 style={{ color: "white" }}>Copyrights to MA^2 team</h2>
       </BottomNavigation> */}
     </div>
-  );
+  )
 }

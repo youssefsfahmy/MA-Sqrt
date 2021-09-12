@@ -29,10 +29,10 @@ export default function Notes() {
   return (
     <div>
       <NavBar />
-      <NoteSection />
-      <BottomNavigation className={classes.footer}>
+      <NoteSection style={{ marginBottom: '10vh' }} />
+      {/* <BottomNavigation className={classes.footer}>
         <h2 style={{ color: 'white' }}>Copyrights to MA^2 team</h2>
-      </BottomNavigation>
+      </BottomNavigation> */}
     </div>
   )
 }

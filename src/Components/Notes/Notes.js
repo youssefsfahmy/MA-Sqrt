@@ -1,66 +1,66 @@
-import { React, useContext, useState, useEffect } from "react";
-import NoteCard from "./NoteCard";
-import NoteInput from "../../Components/Notes/NoteInput";
-import { makeStyles } from "@material-ui/core/styles";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import { React, useContext, useState, useEffect } from 'react'
+import NoteCard from './NoteCard'
+import NoteInput from '../../Components/Notes/NoteInput'
+import { makeStyles } from '@material-ui/core/styles'
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert'
 // import UserIdcontext from '../LogIn/UserIdcontext'
-import axios from "axios";
+import axios from 'axios'
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} variant='filled' {...props} />
 }
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     // justifyContent: "center",
-    minHeight: "100vh",
-    backgroundColor: "whitesmoke",
+    minHeight: '100vh',
+    backgroundColor: 'whitesmoke',
   },
   notes: {
     // display: "flex",
     // flexWrap: "wrap",
-    marginTop: "3vw",
+    marginTop: '3vw',
     // placeContent:"center",
     // alignItems:"center"
   },
   noteSection: {
-    display: "flex",
-    flexWrap: "wrap",
-    placeContent: "center",
+    display: 'flex',
+    flexWrap: 'wrap',
+    placeContent: 'center',
   },
-}));
+}))
 export default function Notes() {
-  const classes = useStyles();
-  const [arr, setArr] = useState([]);
-  const [button, setButton] = useState(false);
+  const classes = useStyles()
+  const [arr, setArr] = useState([])
+  const [button, setButton] = useState(false)
   // const [id, setId] = useContext(UserIdcontext)
-  const [idnote, setIdNote] = useState(0);
-  const [open, setOpen] = useState(false);
-  const [change, setChange] = useState(false);
-  const [popup, setPopup] = useState({ message: "", severity: "" });
+  const [idnote, setIdNote] = useState(0)
+  const [open, setOpen] = useState(false)
+  const [change, setChange] = useState(false)
+  const [popup, setPopup] = useState({ message: '', severity: '' })
   useEffect(() => {
     // console.log('hola', id)
     axios
       .post(
-        "http://localhost:8000/users/getmynotes",
+        'http://localhost:8000/users/getmynotes',
         {},
 
-        { headers: { auth: window.localStorage.getItem("auth") } }
+        { headers: { auth: window.localStorage.getItem('auth') } }
       )
       .then((res) => {
-        console.log(res.data.data);
-        if (res.data.data) setArr(res.data.data);
+        console.log(res.data.data)
+        if (res.data.data) setArr(res.data.data)
       })
-      .catch((err) => console.log(err));
-  }, [change]);
+      .catch((err) => console.log(err))
+  }, [change])
   const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
+    if (reason === 'clickaway') {
+      return
     }
-    setOpen(false);
-  };
+    setOpen(false)
+  }
   return (
     <div className={classes.root}>
       <h1>My Notes</h1>
@@ -89,6 +89,7 @@ export default function Notes() {
                   setPopup={setPopup}
                   setChange={setChange}
                   change={change}
+                  displayIcons={true}
                 />
               ))}
           </div>
@@ -107,6 +108,7 @@ export default function Notes() {
                       setPopup={setPopup}
                       setChange={setChange}
                       change={change}
+                      displayIcons={true}
                     />
                   ) : (
                     <></>
@@ -130,6 +132,7 @@ export default function Notes() {
                       setOpen={setOpen}
                       setChange={setChange}
                       change={change}
+                      displayIcons={true}
                     />
                   ) : (
                     <></>
@@ -161,5 +164,5 @@ export default function Notes() {
         </Alert>
       </Snackbar> */}
     </div>
-  );
+  )
 }

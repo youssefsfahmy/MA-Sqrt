@@ -173,7 +173,7 @@ export default function SignUp2() {
           fontWeight: '700',
           fontSize: '1vw',
           fontFamily: 'sans-serif',
-          cursor : "pointer",
+          cursor: 'pointer',
         }}
       >
         SUBMIT

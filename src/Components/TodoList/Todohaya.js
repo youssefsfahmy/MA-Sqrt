@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles, mergeClasses } from '@material-ui/styles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
@@ -10,6 +10,8 @@ import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import DoneIcon from '@material-ui/icons/Done'
 import axios from 'axios'
+import Dropdown from './Dropdown'
+
 const useStyles = makeStyles((theme) => ({
   item: {
     width: '30vw',
@@ -151,14 +153,21 @@ export default function Todohaya(props) {
           onClick={() => handleCheck(props.elem._id)}
           //   id={elem.key}
         />
+        
 
         {!editMode ? (
+          <div className="prioDiv">
           <ListItemText
             className='listText'
             primary={props.elem.content}
             onClick={() => handleEdit(props.elem._id)}
+            
             // id={elem.key}
           />
+          <Dropdown className="dropdown"  
+          setTodo={setTodoContent} 
+          todoContent={todoContent}/>
+          </div>
         ) : (
           <div className='divEdit'>
             <TextField
@@ -167,6 +176,7 @@ export default function Todohaya(props) {
               value={todoContent.content}
               onChange={(e) => onChange1(e, 'content')}
             />
+            
             {/* <EditText/> */}
             <IconButton
               aria-label='Comments'
