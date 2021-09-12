@@ -21,11 +21,15 @@ export default function ListCard(props) {
       >
         <CardHeader title={props.title} />
         <div>
-          {props.todos.map((d) => (
-            <>
-              <li>{d.content}</li>
-            </>
-          ))}
+          {props.todos.length === 0 ? (
+            <h4>This is an empty list :(, click to add todos</h4>
+          ) : (
+            props.todos.map((d) => (
+              <>
+                <li>{d.content}</li>
+              </>
+            ))
+          )}
         </div>
       </Card>
     </div>

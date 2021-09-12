@@ -140,19 +140,21 @@ export default function Newsidebar(props) {
   const list = () => (
     <div style={{ positon: 'relative' }}>
       <List>
-        {props.all.map((elem, index) => (
-          <>
-            <ListItem button key={elem.title}>
-              <ListItemText
-                onClick={(e) => onClick2(e, elem._id)}
-                primary={elem.title}
-              />
-              <ListItemIcon onClick={() => handleDelete(elem._id)}>
-                <DeleteIcon />
-              </ListItemIcon>
-            </ListItem>
-          </>
-        ))}
+        {props.all
+          .sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited))
+          .map((elem, index) => (
+            <>
+              <ListItem button key={elem.title}>
+                <ListItemText
+                  onClick={(e) => onClick2(e, elem._id)}
+                  primary={elem.title}
+                />
+                <ListItemIcon onClick={() => handleDelete(elem._id)}>
+                  <DeleteIcon />
+                </ListItemIcon>
+              </ListItem>
+            </>
+          ))}
       </List>
       <Divider />
 

@@ -149,11 +149,13 @@ export default function Homepage() {
                 lists tab
               </h3>
             ) : (
-              listarr.map((d) => (
-                <>
-                  <ListCard todos={d.todos} title={d.title} />
-                </>
-              ))
+              listarr
+                .sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited))
+                .map((d) => (
+                  <>
+                    <ListCard todos={d.todos} title={d.title} />
+                  </>
+                ))
             )}
           </div>
         </div>
