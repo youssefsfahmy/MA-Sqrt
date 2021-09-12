@@ -1,118 +1,113 @@
-import React, { useEffect } from 'react'
-import NavBar from '../Components/HomePage/NavBar'
-import homebgd from '../Homepagebgd.png'
+import React, { useEffect } from "react";
+import NavBar from "../Components/HomePage/NavBar";
+import homebgd from "../Homepagebgd.png";
 // import { height } from "@material-ui/system";
-import { useContext } from 'react'
-import UserNamecontext from '../Components/UserNamecontext'
-import NoteCard from '../Components/Notes/NoteCard'
-import axios from 'axios'
-import { BottomNavigation } from '@material-ui/core'
-import { useHistory } from 'react-router'
-import ListCard from '../Components/TodoList/ListCard'
-import Emoji from '../Emoji'
+import { useContext } from "react";
+import UserNamecontext from "../Components/UserNamecontext";
+import NoteCard from "../Components/Notes/NoteCard";
+import axios from "axios";
+import { BottomNavigation } from "@material-ui/core";
+import { useHistory } from "react-router";
+import ListCard from "../Components/TodoList/ListCard";
+import Emoji from "../Emoji";
 export default function Homepage() {
-  const [user, setUser] = React.useState('')
-  const [notearr, setNotearr] = React.useState([])
-  const [listarr, setListarr] = React.useState([])
-  const [notes, setNotes] = React.useState([])
+  const [user, setUser] = React.useState("");
+  const [notearr, setNotearr] = React.useState([]);
+  const [listarr, setListarr] = React.useState([]);
+  const [notes, setNotes] = React.useState([]);
 
   useEffect(() => {
     // console.log('hola', id)
     axios
       .post(
-        'http://localhost:8000/users/getmynotes',
+        "http://localhost:8000/users/getmynotes",
         {},
 
-        { headers: { auth: window.localStorage.getItem('auth') } }
+        { headers: { auth: window.localStorage.getItem("auth") } }
       )
       .then((res) => {
-        console.log(res.data)
-        const arrayn = res.data.data
-        arrayn.sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited))
+        console.log(res.data);
+        const arrayn = res.data.data;
+        arrayn.sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited));
         // arrayn.splice(0, 2);
-        const arr = []
+        const arr = [];
         for (let i = 0; i < Math.min(2, arrayn.length); i++) {
-          arr.push(arrayn[i])
+          arr.push(arrayn[i]);
         }
-        console.log(arrayn, 'notesss')
-        setNotearr([...arr])
+        console.log(arrayn, "notesss");
+        setNotearr([...arr]);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
     ///FILLL HEREEEE , ADDDDD GETTT MYYYYYY LISTSSSSSSSSSSSS
     axios
       .post(
-        'http://localhost:8000/users/getmylists',
+        "http://localhost:8000/users/getmylists",
         {},
 
-        { headers: { auth: window.localStorage.getItem('auth') } }
+        { headers: { auth: window.localStorage.getItem("auth") } }
       )
       .then((res) => {
-        console.log(res)
-        const arrayl = res.data.data
+        console.log(res);
+        const arrayl = res.data.data;
         // arrayl.sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited));
         // arrayn.splice(0, 2);
-        const arr = []
+        const arr = [];
         for (let i = 0; i < Math.min(2, arrayl.length); i++) {
-          arr.push(arrayl[i])
+          arr.push(arrayl[i]);
         }
         // console.log(arrayl, "lists");
-        setListarr([...arr]) //different array here
+        setListarr([...arr]); //different array here
       })
-      .catch((err) => console.log(err))
-  }, [])
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     axios
       .post(
-        'http://localhost:8000/users/userdetails',
+        "http://localhost:8000/users/userdetails",
         {},
-        { headers: { auth: window.localStorage.getItem('auth') } }
+        { headers: { auth: window.localStorage.getItem("auth") } }
       )
       .then((res) => {
-        console.log(res.data.user.name)
-        setUser(res.data.user.name)
+        console.log(res.data.user.name);
+        setUser(res.data.user.name);
         // if (res.data.data) setArr(res.data.data)
       })
-      .catch((err) => console.log(err))
-  }, [])
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div>
       <div>
-        <NavBar style={{ position: 'sticky' }} />
-        <div style={{    height:"46vw",
-    overflowY: "hidden",}}>
-        <img
-          src={homebgd}
-          style={{ width: '100%' }}
-          alt={'welcome'}
-        />
-        <h1
-          style={{
-            position: 'absolute',
-            bottom: '4vw',
-            left: '20vw',
-            fontSize: '5vw',
-            color: 'white',
-          }}
-        >
-          Welcome Back,{user}
-        </h1>
+        <NavBar style={{ position: "sticky" }} />
+        <div style={{ height: "46vw", overflowY: "hidden" }}>
+          <img src={homebgd} style={{ width: "100%" }} alt={"welcome"} />
+          <h1
+            style={{
+              position: "absolute",
+              bottom: "4vw",
+              left: "20vw",
+              fontSize: "5vw",
+              color: "white",
+            }}
+          >
+            Welcome Back,{user}
+          </h1>
         </div>
       </div>
-      <div style={{ backgroundColor: 'whitesmoke' }}>
+      <div style={{ backgroundColor: "whitesmoke" }}>
         <div
           style={{
-            textAlign: '-webkit-center',
+            textAlign: "-webkit-center",
           }}
         >
-          <h1>Latest Notes</h1>
+          <h1 style={{ color: "gray" }}>Latest Notes</h1>
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'center',
-              height: '70vh',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "center",
+              height: "70vh",
+              alignItems: "center",
             }}
           >
             {console.log(notearr.length)}
@@ -133,17 +128,17 @@ export default function Homepage() {
         </div>
         <div
           style={{
-            textAlign: '-webkit-center',
+            textAlign: "-webkit-center",
           }}
         >
-          {' '}
-          <h1>Latest Todo Lists</h1>
+          {" "}
+          <h1 style={{ color: "gray" }}>Latest Todo Lists</h1>
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'center',
-              height: '70vh',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "center",
+              height: "70vh",
+              alignItems: "center",
             }}
           >
             {listarr.length === 0 ? (
@@ -152,11 +147,13 @@ export default function Homepage() {
                 lists tab
               </h3>
             ) : (
-              listarr.map((d) => (
-                <>
-                  <ListCard todos={d.todos} title={d.title} />
-                </>
-              ))
+              listarr
+                .sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited))
+                .map((d) => (
+                  <>
+                    <ListCard todos={d.todos} title={d.title} />
+                  </>
+                ))
             )}
           </div>
         </div>
@@ -165,5 +162,5 @@ export default function Homepage() {
         <h1 style={{ color: 'white' }}>Copyrights to MA^2 team</h1>
       </BottomNavigation> */}
     </div>
-  )
+  );
 }

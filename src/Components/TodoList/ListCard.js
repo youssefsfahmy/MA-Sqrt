@@ -20,14 +20,16 @@ export default function ListCard(props) {
         onClick={() => history.push('/Todo')}
       >
         <CardHeader title={props.title} />
-        <div style={{    textAlign: "left",
-    paddingLeft: "3vw",
-    fontSize: "1.5vw",}}>
-          {props.todos.map((d) => (
-            <>
-              <li>{d.content}</li>
-            </>
-          ))}
+        <div>
+          {props.todos.length === 0 ? (
+            <h4>This is an empty list :(, click to add todos</h4>
+          ) : (
+            props.todos.map((d) => (
+              <>
+                <li>{d.content}</li>
+              </>
+            ))
+          )}
         </div>
       </Card>
     </div>

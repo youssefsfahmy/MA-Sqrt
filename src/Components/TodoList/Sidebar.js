@@ -93,10 +93,8 @@ export default function Sidebar(props) {
         props.setOpen(true)
       })
       .catch((err) => console.log(err))
-
-
   }
-  
+
   const onClick2 = (e, id) => {
     props.setCurId(id)
     props.setChange(!props.change)
@@ -142,7 +140,7 @@ export default function Sidebar(props) {
       <Divider />
       <ListItem>
         <ListItemIcon key={'Add'} onClick={onClick}>
-          <AddBoxIcon />
+          <AddBoxIcon style={{ cursor: 'pointer' }} />
         </ListItemIcon>
         <input onChange={handleK} />
       </ListItem>

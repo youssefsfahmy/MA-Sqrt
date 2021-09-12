@@ -17,12 +17,14 @@ import DialogContent from '@material-ui/core/DialogContent'
 import axios from 'axios'
 import { useHistory } from 'react-router'
 // import UserIdcontext from '../LogIn/UserIdcontext'
+import '../../Css/Note.css'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '20vw',
     margin: '1vw',
     height: '20vw',
-    overflowY: 'scroll',
+    // overflowY: 'scroll',
   },
   media: {
     height: 0,
@@ -56,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
   dial2: {},
   noteContent: {
     // width: "12vfitw"
+    height: '8vw',
   },
   pp: {
     wordBreak: 'break-all',

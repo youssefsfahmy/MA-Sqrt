@@ -16,7 +16,6 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import axios from "axios";
 import AddBoxIcon from "@material-ui/icons/AddBox";
-import "../../newsidebar.css";
 
 const drawerWidth = 240;
 
@@ -36,6 +35,13 @@ const useStyles = makeStyles((theme) => ({
   // necessary for content to be below app bar
   toolbar: {
     fontSize: "2vw",
+    textAlignLast: "center",
+    // marginTop: "2vw",
+    fontFamily: "fantasy",
+    color: "slategrey",
+  },
+  addnew: {
+    fontSize: "1vw",
     textAlignLast: "center",
     // marginTop: "2vw",
     fontFamily: "fantasy",
@@ -146,12 +152,15 @@ export default function Newsidebar(props) {
         ))}
       </List>
       <Divider />
+
       <ListItem>
         <ListItemIcon key={"Add"} onClick={onClick}>
-          <AddBoxIcon />
+          <AddBoxIcon style={{ cursor: "pointer" }} />
         </ListItemIcon>
         <input onChange={handleK} />
       </ListItem>
+      {/* <Divider /> */}
+      <p className={classes.addnew}>Add a new list</p>
     </div>
   );
 
@@ -172,7 +181,7 @@ export default function Newsidebar(props) {
         }}
         anchor="left"
       >
-        <div className={classes.toolbar}>MYLISTS</div>
+        <div className={classes.toolbar}>MY LISTS</div>
         <Divider />
         {list()}
         <Divider />

@@ -1,14 +1,15 @@
 * {
   overflow-x: hidden;
 }
-.prioDiv{
+.prioDiv {
   display: flex;
   justify-content: center;
 }
-.listText{
+.listText {
   display: flex;
   justify-content: center;
 }
-.dropdown{
+.dropdown {
   height: 5vw;
 }
+

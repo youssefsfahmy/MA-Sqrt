@@ -1,14 +1,14 @@
-import React, { useContext, useState, useEffect } from "react";
-import Sidebar from "../Components/TodoList/Sidebar";
-import Newsidebar from "../Components/TodoList/Newsidebar";
-import TodoList from "../Components/TodoList/TodoList";
-import NavBar from "../Components/HomePage/NavBar";
-import axios from "axios";
-import MuiAlert from "@material-ui/lab/Alert";
-import Snackbar from "@material-ui/core/Snackbar";
-import { BottomNavigation } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router";
+import React, { useContext, useState, useEffect } from 'react'
+import Sidebar from '../Components/TodoList/Sidebar'
+import Newsidebar from '../Components/TodoList/Newsidebar'
+import TodoList from '../Components/TodoList/TodoList'
+import NavBar from '../Components/HomePage/NavBar'
+import axios from 'axios'
+import MuiAlert from '@material-ui/lab/Alert'
+import Snackbar from '@material-ui/core/Snackbar'
+import { BottomNavigation } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { useHistory } from 'react-router'
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -84,7 +84,7 @@ export default function Todo() {
         }}
       >
         <Newsidebar
-          style={{ positon: "relative!important" }}
+          style={{ positon: 'relative!important' }}
           all={all}
           setAll={setAll}
           change={change}
