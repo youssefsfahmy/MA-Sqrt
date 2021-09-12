@@ -30,6 +30,13 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     placeContent: 'center',
   },
+  toolbar: {
+    fontSize: '3vw',
+    textAlignLast: 'center',
+    // marginTop: "2vw",
+    fontFamily: 'fantasy',
+    color: 'gray',
+  },
 }))
 export default function Notes() {
   const classes = useStyles()
@@ -63,7 +70,7 @@ export default function Notes() {
   }
   return (
     <div className={classes.root}>
-      <h1>My Notes</h1>
+      <h1 className={classes.toolbar}>My Notes</h1>
       <NoteInput
         arr={arr}
         setArr={setArr}

@@ -103,7 +103,7 @@ export default function Homepage() {
             textAlign: '-webkit-center',
           }}
         >
-          <h1>Latest Notes</h1>
+          <h1 style={{ color: 'gray' }}>Latest Notes</h1>
           <div
             style={{
               display: 'flex',
@@ -134,7 +134,7 @@ export default function Homepage() {
           }}
         >
           {' '}
-          <h1>Latest Todo Lists</h1>
+          <h1 style={{ color: 'gray' }}>Latest Todo Lists</h1>
           <div
             style={{
               display: 'flex',

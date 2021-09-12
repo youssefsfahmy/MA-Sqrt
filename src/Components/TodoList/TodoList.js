@@ -7,6 +7,7 @@ import Snackbar from '@material-ui/core/Snackbar'
 import axios from 'axios'
 import UserIdcontext from '../LogIn/UserIdcontext'
 import DoneIcon from '@material-ui/icons/Done'
+import TodoListCard from './TodoListCard'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant='filled' {...props} />
@@ -164,7 +165,7 @@ export default function TodoList(props) {
           </div>
         </>
       ) : (
-        <h1>choose a list</h1>
+        <TodoListCard />
       )}
     </div>
   )

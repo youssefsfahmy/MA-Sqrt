@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import Sidebar from '../Components/TodoList/Sidebar'
+import Newsidebar from '../Components/TodoList/Newsidebar'
 import TodoList from '../Components/TodoList/TodoList'
 import NavBar from '../Components/HomePage/NavBar'
 import axios from 'axios'
@@ -82,7 +83,8 @@ export default function Todo() {
           display: 'flex',
         }}
       >
-        <Sidebar
+        <Newsidebar
+          style={{ positon: 'relative!important' }}
           all={all}
           setAll={setAll}
           change={change}

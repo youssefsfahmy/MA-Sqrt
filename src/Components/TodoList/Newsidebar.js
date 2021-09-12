@@ -1,41 +1,76 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
-import Button from '@material-ui/core/Button'
+import Drawer from '@material-ui/core/Drawer'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
 import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import DeleteIcon from '@material-ui/icons/Delete'
-
-// import { Height } from "@material-ui/icons";
-import { AiOutlineUnorderedList } from 'react-icons/ai'
-
-import AddBoxIcon from '@material-ui/icons/AddBox'
-import { useContext } from 'react'
-import Titlecontext from './Titlecontext'
+import InboxIcon from '@material-ui/icons/MoveToInbox'
+import MailIcon from '@material-ui/icons/Mail'
 import axios from 'axios'
-import { IconButton } from 'material-ui'
-const useStyles = makeStyles({
+import AddBoxIcon from '@material-ui/icons/AddBox'
+
+const drawerWidth = 240
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    paddingTop: '4vw',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    positon: 'relative',
+  },
+  // necessary for content to be below app bar
+  toolbar: {
+    fontSize: '2vw',
+    textAlignLast: 'center',
+    // marginTop: "2vw",
+    fontFamily: 'fantasy',
+    color: 'slategrey',
+  },
+  addnew: {
+    fontSize: '1vw',
+    textAlignLast: 'center',
+    // marginTop: "2vw",
+    fontFamily: 'fantasy',
+    color: 'slategrey',
+  },
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing(3),
+    positon: 'relative',
+  },
   list: {
     width: 250,
+    positon: 'relative',
   },
   fullList: {
     width: 'auto',
+    positon: 'relative',
   },
   button: {
     fontSize: '2vw',
     fontFamily: 'sans-serif',
   },
-})
+}))
 
-export default function Sidebar(props) {
-  const [title, setTitle] = useState('')
+export default function Newsidebar(props) {
   const classes = useStyles()
+  const [title, setTitle] = useState('')
   const [key, setKey] = useState(0)
-  //  const [curr, setCurr] = React.useState(0);
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -46,7 +81,10 @@ export default function Sidebar(props) {
     setTitle('')
   }, [state])
 
-  /// const [lists, setLists] = React.useState([]);
+  const handleK = (e) => {
+    setTitle(e.target.value)
+  }
+
   const onClick = () => {
     axios
       .post(
@@ -85,7 +123,7 @@ export default function Sidebar(props) {
         console.log(res)
         if (res.data.statusCode === 0) {
           props.setChange(!props.change)
-          if (id2 === props.curId) props.setCurId('')
+          props.setCurId('')
           props.setPopup({ message: res.data.message, severity: 'success' })
         } else {
           props.setPopup({ message: res.data.error, severity: 'error' })
@@ -99,29 +137,8 @@ export default function Sidebar(props) {
     props.setCurId(id)
     props.setChange(!props.change)
   }
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event &&
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
-    ) {
-      return
-    }
-
-    setState({ ...state, [anchor]: open })
-  }
-  const handleK = (e) => {
-    setTitle(e.target.value)
-  }
-  const list = (anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
-      role='presentation'
-      // onClick={toggleDrawer(anchor, false)}
-      // onKeyDown={toggleDrawer(anchor, false)}
-    >
+  const list = () => (
+    <div style={{ positon: 'relative' }}>
       <List>
         {props.all.map((elem, index) => (
           <>
@@ -138,38 +155,44 @@ export default function Sidebar(props) {
         ))}
       </List>
       <Divider />
+
       <ListItem>
         <ListItemIcon key={'Add'} onClick={onClick}>
           <AddBoxIcon style={{ cursor: 'pointer' }} />
         </ListItemIcon>
         <input onChange={handleK} />
       </ListItem>
+      {/* <Divider /> */}
+      <p className={classes.addnew}>Add a new list</p>
     </div>
   )
 
   return (
-    <div style={{ width: '25vw', Height: '100vw' }}>
-      <>
-        {['My Lists'].map((anchor) => (
-          <React.Fragment key={anchor}>
-            <Button
-              className={classes.button}
-              onClick={toggleDrawer(anchor, true)}
-            >
-              {anchor}
-            </Button>
-            <SwipeableDrawer
-              anchor={anchor}
-              open={state[anchor]}
-              onClose={toggleDrawer(anchor, false)}
-              onOpen={toggleDrawer(anchor, true)}
-            >
-              {list(anchor)}
-            </SwipeableDrawer>
-          </React.Fragment>
-        ))}
-      </>
-      {/* <Button onClick={toggleDrawer("Add", true)}>Add</Button> */}
+    <div className={classes.root}>
+      <CssBaseline style={{ positon: 'relative' }} />
+      {/* <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <Typography variant="h6" noWrap>
+            Permanent drawer
+          </Typography>
+        </Toolbar>
+      </AppBar> */}
+      <Drawer
+        className={classes.drawer}
+        variant='permanent'
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor='left'
+      >
+        <div className={classes.toolbar}>MY LISTS</div>
+        <Divider />
+        {list()}
+        <Divider />
+      </Drawer>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+      </main>
     </div>
   )
 }

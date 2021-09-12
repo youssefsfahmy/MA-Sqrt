@@ -14,9 +14,10 @@ function Alert(props) {
 export default function SignUp2() {
   const history = useHistory()
   const [userdet, setUserdet] = useContext(UserContext)
-  const [userpass, setUserpass] = React.useState('')
+  const [userpass, setUserpass] = React.useState({ pass: '', confirm: '' })
   const [open, setOpen] = React.useState(false) //snackbar
   const [popup, setPopup] = React.useState({ message: '', severity: '' })
+  // const [passConstraint, setPassConstraint] = React.useState(false)
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
@@ -47,6 +48,7 @@ export default function SignUp2() {
         history.push(path)
       }, 2000)
     } else {
+      // if(userpass=userpass.length<8)
       setPopup({ message: res.data.error, severity: 'error' })
       setOpen(true)
     }
@@ -90,8 +92,9 @@ export default function SignUp2() {
           width: '20vw',
         }}
         type='password'
+        onChange={(event) => setUserpass(event.target.value)}
       />
-      <div
+      {/* <div
         style={{
           display: 'flex',
           marginLeft: '3.5vw',
@@ -136,9 +139,9 @@ export default function SignUp2() {
           </li>
         </ul>
         <div></div>
-      </div>
+      </div> */}
 
-      <div>
+      <div style={{ marginTop: '4vh' }}>
         <label
           style={{
             fontWeight: '600',
