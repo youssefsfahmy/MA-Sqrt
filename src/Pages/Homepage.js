@@ -79,16 +79,18 @@ export default function Homepage() {
   return (
     <div>
       <div>
-        <NavBar style={{ position: 'static' }} />
+        <NavBar style={{ position: 'sticky' }} />
+        <div style={{    height:"46vw",
+    overflowY: "hidden",}}>
         <img
           src={homebgd}
-          style={{ width: '100%', height: '30vw' }}
+          style={{ width: '100%' }}
           alt={'welcome'}
         />
         <h1
           style={{
             position: 'absolute',
-            bottom: '230px',
+            bottom: '4vw',
             left: '20vw',
             fontSize: '5vw',
             color: 'white',
@@ -96,6 +98,7 @@ export default function Homepage() {
         >
           Welcome Back,{user}
         </h1>
+        </div>
       </div>
       <div style={{ backgroundColor: 'whitesmoke' }}>
         <div
@@ -108,7 +111,7 @@ export default function Homepage() {
             style={{
               display: 'flex',
               justifyContent: 'center',
-              height: '50vh',
+              height: '70vh',
               alignItems: 'center',
             }}
           >
@@ -139,7 +142,7 @@ export default function Homepage() {
             style={{
               display: 'flex',
               justifyContent: 'center',
-              height: '65vh',
+              height: '70vh',
               alignItems: 'center',
             }}
           >
@@ -158,9 +161,9 @@ export default function Homepage() {
           </div>
         </div>
       </div>
-      <BottomNavigation style={{ backgroundColor: 'gray', height: '7vw' }}>
+      {/* <BottomNavigation style={{ backgroundColor: 'gray', height: '7vw' }}>
         <h1 style={{ color: 'white' }}>Copyrights to MA^2 team</h1>
-      </BottomNavigation>
+      </BottomNavigation> */}
     </div>
   )
 }

@@ -44,18 +44,18 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '18px',
   },
   notes: {
-    backgroundColor: 'gray',
-    border: 'none',
-    color: 'white',
-    fontSize: '18px',
-    cursor: 'pointer',
+    backgroundColor: "gray",
+    border: "none",
+    color: "white",
+    fontSize: "18px",
+    cursor: "pointer",
   },
   todo: {
-    backgroundColor: 'gray',
-    border: 'none',
-    color: 'white',
-    fontSize: '18px',
-    cursor: 'pointer',
+    backgroundColor: "gray",
+    border: "none",
+    color: "white",
+    fontSize: "18px",
+    cursor: "pointer",
   },
 }))
 
@@ -69,12 +69,12 @@ export default function NavBar() {
 
   const handleClose = () => {
     // window.localStorage.removeItem('auth')
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
   const handleClose2 = () => {
-    window.localStorage.removeItem('auth')
-    setAnchorEl(null)
-  }
+    window.localStorage.removeItem("auth");
+    setAnchorEl(null);
+  };
 
   return (
     <div className={classes.root}>
@@ -112,8 +112,8 @@ export default function NavBar() {
                 Notes
               </button>
             </Link>
-            <Link to='/Todo'>
-              <button id='todo' className={classes.todo}>
+            <Link to="/Todo">
+              <button id="todo" className={classes.todo}>
                 To-Do Lists
               </button>
             </Link>
@@ -132,7 +132,7 @@ export default function NavBar() {
                 aria-controls='menu-appbar'
                 aria-haspopup='true'
                 onClick={handleMenu}
-                color='inherit'
+                color="inherit"
               >
                 <AccountCircle />
               </IconButton>
@@ -151,11 +151,10 @@ export default function NavBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <Link to='/'>
-                  {' '}
-                  <MenuItem onClick={handleClose2}>Sign out</MenuItem>{' '}
+                <Link to="/">
+                  {" "}
+                  <MenuItem onClick={handleClose2}>Sign out</MenuItem>{" "}
                 </Link>
-                <MenuItem>My account</MenuItem>
               </Menu>
             </div>
             {/* <IconButton
