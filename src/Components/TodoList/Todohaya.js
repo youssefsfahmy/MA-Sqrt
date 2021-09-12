@@ -163,12 +163,10 @@ export default function Todohaya(props) {
             className='listText'
             primary={props.elem.content}
             onClick={() => handleEdit(props.elem._id)}
-            
+
             // id={elem.key}
           />
-          <Dropdown className="dropdown"  
-          setTodo={setTodoContent} 
-          todoContent={todoContent}/>
+        
           </div>
         ) : (
           <div className='divEdit'>
@@ -185,6 +183,7 @@ export default function Todohaya(props) {
               onClick={() => handleUpdate(props.elem._id)}
               //   id={elem.key}
             >
+              
               <DoneIcon />
             </IconButton>
           </div>
@@ -195,7 +194,12 @@ export default function Todohaya(props) {
             onClick={() => handleDelete(props.elem._id)}
             // id={elem.key}
           >
-            <DeleteIcon />
+             <Dropdown className="dropdown"  
+          setTodo={setTodoContent} 
+          todoContent={todoContent}
+          change2={props.change2}
+          setChange2={props.setChange2}/>
+          <DeleteIcon />
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>

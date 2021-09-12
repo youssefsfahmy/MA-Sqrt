@@ -107,7 +107,10 @@ function CheckboxList(props) {
     <>
       <div style={{ backgroundColor: "whitesmoke" }} />
       <List className={classes.root}>
-        {props.arrayy.map((elem, index) => (
+
+        {props.arrayy .sort((a, b) => b.priority - a.priority)
+
+        .map((elem, index) => (
           // <ListItem
           //   key={elem}
           //   role={undefined}
