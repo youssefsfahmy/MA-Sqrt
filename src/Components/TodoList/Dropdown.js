@@ -22,6 +22,7 @@ export default function SimpleSelect(props) {
 
   const handleChange = (e , prio ) => {
       props.setTodo({ ...props.todoContent,[prio]:e.target.value })
+      props.setChange2(!props.change2)
     console.log(props.todoContent.priority)
   };
 

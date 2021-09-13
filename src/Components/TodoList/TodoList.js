@@ -98,6 +98,10 @@ export default function TodoList(props) {
   //   if (props.cur === -1) return
   //   setArray(props.all[props.cur].todos)
   // }, [props.cur])
+  const sortArray =(e) => {
+    e.priority.sort(function(a, b){return a-b})
+  }
+
 
   return (
     <div

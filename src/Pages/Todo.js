@@ -43,7 +43,8 @@ export default function Todo() {
       history.push('/')
     }
   }, [])
-  // console.log(all[cur]);
+
+
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {

@@ -106,24 +106,25 @@ function CheckboxList(props) {
     <>
       <div style={{ backgroundColor: "whitesmoke" }} />
       <List className={classes.root}>
-        {props.arrayy
-          .sort((a, b) => new Date(b.lastEdited) - new Date(a.lastEdited))
-          .map((elem, index) => (
-            // <ListItem
-            //   key={elem}
-            //   role={undefined}
-            //   dense
-            //   button
-            //   onClick={() => handleToggle(elem)}
-            // >
-            //   {/* <Checkbox checked={ checked.indexOf(elem.isComplete) !== -1} tabIndex={-1} disableRipple  onClick={() => handleCheck(elem.key)}   id={elem.key}/> */}
-            //   <Checkbox
-            //     checked={elem.isComplete}
-            //     tabIndex={-1}
-            //     disableRipple
-            //     onClick={() => handleCheck(index)}
-            //     id={elem.key}
-            //   />
+
+        {props.arrayy .sort((a, b) => b.priority - a.priority)
+
+        .map((elem, index) => (
+          // <ListItem
+          //   key={elem}
+          //   role={undefined}
+          //   dense
+          //   button
+          //   onClick={() => handleToggle(elem)}
+          // >
+          //   {/* <Checkbox checked={ checked.indexOf(elem.isComplete) !== -1} tabIndex={-1} disableRipple  onClick={() => handleCheck(elem.key)}   id={elem.key}/> */}
+          //   <Checkbox
+          //     checked={elem.isComplete}
+          //     tabIndex={-1}
+          //     disableRipple
+          //     onClick={() => handleCheck(index)}
+          //     id={elem.key}
+          //   />
 
             //   {elem.editMode !== false ? (
             //     <ListItemText
